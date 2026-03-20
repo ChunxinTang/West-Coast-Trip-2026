@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美国西海岸自驾游 · 完整攻略</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a;
+  --paper: #faf8f4;
+  --cream: #f3ede3;
+  --gold: #c9943a;
+  --rust: #b84c2b;
+  --sage: #5a7358;
+  --blue: #2c5f82;
+  --muted: #7a6e5f;
+  --border: #ddd4c2;
+  --card: #ffffff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3', 'Noto Serif SC', sans-serif; line-height: 1.6; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: white;
+  padding: 60px 24px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 80px);
+}
+.hero-flag { font-size: 32px; letter-spacing: 10px; margin-bottom: 16px; }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 52px);
+  color: #e8c97a;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hero h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(16px, 3vw, 22px);
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+  font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase;
+}
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink);
+  display: flex; overflow-x: auto; gap: 0;
+  border-bottom: 2px solid #333;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer; border: none; background: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: #e8c97a; }
+.nav-tab.active { color: #e8c97a; border-bottom-color: #e8c97a; }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 0 0 60px; }
+.section.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  background: linear-gradient(135deg, var(--ink) 0%, #2d2d2d 100%);
+  padding: 36px 24px;
+  color: white;
+  text-align: center;
+}
+.sec-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; color: #e8c97a; margin-bottom: 4px;
+}
+.sec-header p { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+/* ── CONTAINER ── */
+.container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+/* ── REGION DIVIDER ── */
+.region-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 32px 0 16px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted);
+}
+.region-divider::before, .region-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ── DAY CARD ── */
+.day-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.day-header {
+  display: flex; align-items: center; gap: 0;
+  cursor: pointer;
+  padding: 0;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.day-header:hover { background: #ede7da; }
+.day-num {
+  background: var(--ink);
+  color: #e8c97a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  min-width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.day-info { padding: 10px 16px; flex: 1; }
+.day-date { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.day-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.day-title-cn { font-family: 'Noto Serif SC'; font-size: 13px; color: var(--muted); }
+.day-drive {
+  padding: 8px 14px;
+  background: var(--ink);
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 70px;
+  text-align: center;
+}
+.day-drive .drive-icon { font-size: 16px; margin-bottom: 2px; }
+.day-expand { padding: 10px 14px; color: var(--muted); font-size: 18px; flex-shrink: 0; }
+
+.day-body { padding: 16px 20px; display: none; }
+.day-body.open { display: block; }
+
+.time-row {
+  display: flex; gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.time-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.time-badge {
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #e8c97a;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  height: fit-content;
+  margin-top: 2px;
+}
+.time-badge.am { background: #2c5f82; }
+.time-badge.pm { background: #5a7358; }
+.time-badge.eve { background: #7a4a2a; }
+.time-content {}
+.time-en { font-size: 14px; font-weight: 600; color: var(--ink); }
+.time-cn { font-family: 'Noto Serif SC'; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.time-note { font-size: 12px; color: #888; font-style: italic; }
+.time-note-cn { font-family: 'Noto Serif SC'; font-size: 12px; color: #999; }
+
+/* changed badge */
+.new-badge {
+  display: inline-block;
+  background: #e8c97a; color: var(--ink);
+  font-size: 9px; font-weight: 700;
+  padding: 2px 5px; border-radius: 3px;
+  margin-left: 6px; vertical-align: middle;
+  letter-spacing: 1px;
+}
+
+/* ── ATTRACTION CARDS ── */
+.attraction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+.attr-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.attr-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.attr-card.checked { border-color: var(--sage); background: #f2f7f2; }
+.attr-card .check-box {
+  position: absolute; top: 14px; right: 14px;
+  width: 22px; height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all 0.2s;
+}
+.attr-card.checked .check-box { background: var(--sage); border-color: var(--sage); color: white; }
+.attr-icon { font-size: 24px; margin-bottom: 8px; }
+.attr-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; padding-right: 28px; }
+.attr-name-cn { font-family: 'Noto Serif SC'; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.attr-desc { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 6px; }
+.attr-desc-cn { font-family: 'Noto Serif SC'; font-size: 12px; color: #888; line-height: 1.6; }
+.attr-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.attr-tag {
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 20px; border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ── HISTORY ── */
+.history-section { padding: 24px 0; }
+.history-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.history-block h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; color: var(--gold);
+  margin-bottom: 4px;
+}
+.history-block h3 span {
+  font-family: 'Noto Serif SC'; font-size: 15px; color: var(--muted); font-weight: 400; margin-left: 8px;
+}
+.history-block p { font-size: 13px; color: #555; line-height: 1.8; margin-top: 8px; }
+.history-block p.cn { font-family: 'Noto Serif SC'; color: #666; }
+
+/* ── TIPS ── */
+.tip-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.tip-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.tip-text { font-size: 13px; color: #555; line-height: 1.7; }
+.tip-text strong { color: var(--ink); }
+.tip-text .cn { font-family: 'Noto Serif SC'; color: #777; display: block; margin-top: 3px; }
+
+/* ── CHECKLIST COUNTER ── */
+.check-counter {
+  position: fixed; bottom: 24px; right: 20px;
+  background: var(--sage);
+  color: white; padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  display: none; z-index: 200;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.check-counter:hover { transform: scale(1.05); }
+.check-counter.visible { display: flex; align-items: center; gap: 8px; }
+
+/* ── OVERVIEW MAP ── */
+.route-overview {
+  background: var(--ink);
+  padding: 24px;
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.route-steps {
+  display: flex; align-items: center;
+  gap: 0; min-width: max-content;
+}
+.route-step {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px;
+}
+.route-dot {
+  width: 10px; height: 10px;
+  background: #e8c97a;
+  border-radius: 50%;
+}
+.route-dot.new { background: #c0392b; }
+.route-label {
+  font-size: 10px; color: rgba(255,255,255,0.7);
+  text-align: center; max-width: 60px;
+  font-family: 'Noto Serif SC'; line-height: 1.3;
+}
+.route-label .en { font-family: 'Source Sans 3'; font-size: 9px; color: rgba(255,255,255,0.4); }
+.route-arrow {
+  width: 30px; height: 2px;
+  background: rgba(255,255,255,0.2);
+  position: relative;
+  margin: 0 -4px;
+  margin-top: -18px;
+}
+
+@media (max-width: 600px) {
+  .day-num { min-width: 48px; height: 48px; font-size: 18px; }
+  .day-title { font-size: 14px; }
+  .attraction-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── OUTFIT COLOR GUIDE ── */
+.outfit-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.outfit-scene {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  background: var(--ink);
+}
+.scene-palette { display: flex; gap: 6px; flex-shrink: 0; }
+.swatch {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.scene-info { flex: 1; }
+.scene-title { font-size: 13px; font-weight: 600; color: #e8c97a; margin-bottom: 2px; }
+.scene-title-cn { font-family: 'Noto Serif SC'; font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.scene-bg { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+.outfit-recs { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.rec { }
+.rec-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; color: var(--muted); }
+.rec-swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.rec-swatch {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.rec-swatch span {
+  font-size: 9px; color: white; font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-align: center; line-height: 1.2;
+}
+.rec-swatch.avoid { opacity: 0.55; position: relative; }
+.rec-swatch.avoid::after {
+  content: '✕';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 16px; color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.rec-note { font-size: 12px; color: #666; font-family: 'Noto Serif SC'; line-height: 1.7; }
+.rec.bad { border-top: 1px dashed var(--border); padding-top: 12px; }
+.ctag {
+  display: inline-block;
+  color: white; font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+  margin-right: 4px; margin-bottom: 4px;
+}
+.info-box { }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-flag">🇨🇳 ✈️ 🇺🇸</div>
+  <h1>USA West Coast Road Trip</h1>
+  <h2>美国西海岸自驾游完整攻略</h2>
+  <div class="hero-meta">
+    <span>📅 Apr 25 – May 14, 2026 · 4月25日–5月14日</span>
+    <span>🗓 20天</span>
+    <span>🚗 自驾全程</span>
+    <span>🏔 7个国家公园</span>
+  </div>
+</div>
+
+<!-- ROUTE OVERVIEW -->
+<div class="container">
+  <div class="route-overview">
+    <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">行程路线概览</div>
+    <div class="route-steps">
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">旧金山<div class="en">SF</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">蒙特雷<div class="en">Monterey</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">大苏尔<div class="en">Big Sur</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">洛杉矶<div class="en">LA</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">约书亚树<div class="en">Joshua Tree</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">塞多纳<div class="en">Sedona</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">大峡谷<div class="en">Grand Canyon</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">佩奇<div class="en">Page</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot new"></div><div class="route-label" style="color:#e8c97a">布莱斯★<div class="en">Bryce</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot new"></div><div class="route-label" style="color:rgba(255,255,255,0.5)">锡安路过<div class="en">Zion</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">拉斯维加斯<div class="en">Las Vegas</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot new"></div><div class="route-label" style="color:rgba(255,255,255,0.5)">死亡谷路过<div class="en">Death Valley</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">红杉<div class="en">Sequoia</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">优胜美地<div class="en">Yosemite</div></div></div>
+      <div class="route-arrow"></div>
+      <div class="route-step"><div class="route-dot"></div><div class="route-label">旧金山<div class="en">SF</div></div></div>
+    </div>
+    <div style="margin-top:12px;font-size:10px;color:rgba(255,255,255,0.3)">★ 红色 = 本次新加入景点 · 灰色 = 路过不住宿</div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('itinerary')">📅 每日行程</button>
+  <button class="nav-tab" onclick="showSection('attractions')">🗺 景点清单</button>
+  <button class="nav-tab" onclick="showSection('outfit')">👗 穿搭配色</button>
+  <button class="nav-tab" onclick="showSection('history')">📖 历史文化</button>
+  <button class="nav-tab" onclick="showSection('tips')">💡 实用贴士</button>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION 1: ITINERARY               -->
+<!-- ════════════════════════════════════ -->
+<div class="section active" id="sec-itinerary">
+  <div class="sec-header">
+    <h2>每日行程 Day by Day</h2>
+    <p>点击每一天展开详细安排 · Tap each day to expand</p>
+  </div>
+  <div class="container" style="padding-top:24px">
+
+    <!-- SF -->
+    <div class="region-divider">🌉 旧金山 San Francisco</div>
+
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D1</div>
+        <div class="day-info">
+          <div class="day-date">Sat · 4/25</div>
+          <div class="day-title">Arrive San Francisco</div>
+          <div class="day-title-cn">抵达旧金山</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">✈️</div>抵达日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Arrive SFO 9:05 am · Check in ~2 pm</div>
+            <div class="time-cn">上午9:05抵达 · 约下午2点入住万豪度假会所</div>
+            <div class="time-note-cn">📍 Marriott Vacation Club · 2620 Jones St, SF</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Walk Lombard Street · Movie spots</div>
+            <div class="time-cn">游览伦巴底街（九曲花街）· 电影取景地打卡</div>
+            <div class="time-note-cn">世界最弯曲街道之一，砖红色锯齿形，沿街鲜花盛开</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">傍晚</div>
+          <div class="time-content">
+            <div class="time-en">Sunset at Pier 39</div>
+            <div class="time-cn">39号码头看日落 · 海狮观赏</div>
+            <div class="time-note-cn">这里常年栖息数百头加州海狮，是SF最受欢迎的免费景点</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D2</div>
+        <div class="day-info">
+          <div class="day-date">Sun · 4/26</div>
+          <div class="day-title">San Francisco Full Day</div>
+          <div class="day-title-cn">旧金山全天游</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚶</div>步行日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Golden Gate Bridge · Baker Beach</div>
+            <div class="time-cn">金门大桥 · 贝克海滩</div>
+            <div class="time-note-cn">建议早上去，雾气未散时的金门大桥最为壮观。贝克海滩可以正面拍大桥全景。</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Mission District · Half Moon Bay</div>
+            <div class="time-cn">漫步教会区 · 驾车30分钟到半月湾海岸</div>
+            <div class="time-note-cn">教会区街头壁画丰富，有浓厚拉丁文化气息</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monterey / Big Sur -->
+    <div class="region-divider">🌊 中央海岸 Central Coast</div>
+
+    <!-- Day 3 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D3</div>
+        <div class="day-info">
+          <div class="day-date">Mon · 4/27</div>
+          <div class="day-title">SF → 17-Mile Drive → Monterey</div>
+          <div class="day-title-cn">旧金山 → 17英里 → 蒙特雷</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">17-Mile Drive scenic road</div>
+            <div class="time-cn">17英里景观公路（收费约$12/车）</div>
+            <div class="time-note-cn">沿途有独树岩、海豹岩、Fanshell海滩等标志景点，建议沿途停车慢慢看</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Carmel-by-the-Sea · Pacific Grove</div>
+            <div class="time-cn">卡梅尔小镇逛街 · 太平洋树林</div>
+            <div class="time-note-cn">卡梅尔是美国最美小镇之一，石板路、艺廊、咖啡馆，适合悠闲漫步<br>📍 住宿：150 Fountain Ave, Pacific Grove</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D4</div>
+        <div class="day-info">
+          <div class="day-date">Tue · 4/28</div>
+          <div class="day-title">Monterey → Big Sur → Morro Bay</div>
+          <div class="day-title-cn">蒙特雷 → 大苏尔 → 莫罗湾</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Big Sur – Bixby Creek Bridge · Hurricane Vista Point</div>
+            <div class="time-cn">大苏尔–比克斯比桥 · 飓风观景台</div>
+            <div class="time-note-cn">这座1932年建成的混凝土拱桥高80米，悬于悬崖之上，是1号公路最标志性的画面。飓风观景台可以看到整段海岸线全景</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">McWay Falls</div>
+            <div class="time-cn">麦克威瀑布（落入大海的瀑布）</div>
+            <div class="time-note-cn">世界上极少数直接落入太平洋的瀑布，只能远望，步行约10分钟即到观景点</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">傍晚</div>
+          <div class="time-content">
+            <div class="time-en">Arrive Morro Bay · Morro Rock sunset</div>
+            <div class="time-cn">抵达莫罗湾 · 莫罗岩看日落</div>
+            <div class="time-note-cn">莫罗岩是576英尺高的火山岩，站在海边看日落壮观至极<br>📍 住宿：Anderson Inn / Blufftop Inn & Suites</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LA Desert -->
+    <div class="region-divider">🌴 洛杉矶 & 沙漠 Los Angeles & Desert</div>
+
+    <!-- Day 5 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D5</div>
+        <div class="day-info">
+          <div class="day-date">Wed · 4/29</div>
+          <div class="day-title">Morro Bay → Santa Barbara → LA</div>
+          <div class="day-title-cn">莫罗湾 → 圣巴巴拉 → 洛杉矶</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>3.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Santa Barbara · State Street</div>
+            <div class="time-cn">圣巴巴拉 · 国家大道散步</div>
+            <div class="time-note-cn">西班牙殖民风格白墙红顶建筑，有"美国里维埃拉"之称。State Street上有精品店、咖啡馆，值得停留1-2小时</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Hollywood Sign · Hollywood Blvd</div>
+            <div class="time-cn">好莱坞标志 · 好莱坞大道星光大道</div>
+            <div class="time-note-cn">在Griffith天文台可以同时看到Hollywood招牌和俯瞰LA全景，一石二鸟！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D6</div>
+        <div class="day-info">
+          <div class="day-date">Thu · 4/30</div>
+          <div class="day-title">LA → Joshua Tree NP</div>
+          <div class="day-title-cn">洛杉矶 → 约书亚树国家公园</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Cholla Cactus Garden · Skull Rock</div>
+            <div class="time-cn">乔拉仙人掌园 · 骷髅岩</div>
+            <div class="time-note-cn">数千棵仙人掌密布，清晨阳光斜照时非常魔幻。骷髅岩是天然侵蚀形成，像骷髅眼窝</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Hidden Valley · Keys View sunset</div>
+            <div class="time-cn">隐谷徒步 · 基斯观景台看日落</div>
+            <div class="time-note-cn">Keys View海拔5185英尺，天气好时可以看到Salton Sea和San Jacinto山</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arizona -->
+    <div class="region-divider">🏜 亚利桑那 Arizona</div>
+
+    <!-- Day 7 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D7</div>
+        <div class="day-info">
+          <div class="day-date">Fri · 5/1</div>
+          <div class="day-title">Joshua Tree → Sedona</div>
+          <div class="day-title-cn">约书亚树 → 塞多纳（长途）</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>6 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">全天</div>
+          <div class="time-content">
+            <div class="time-en">Long drive day · Route 66 pit stop</div>
+            <div class="time-cn">长途驾车日 · 66号公路打卡停留</div>
+            <div class="time-note-cn">66号公路是美国第一条横贯东西的公路（1926年），象征着美国公路文化的起源，沿途复古加油站和老式路牌是经典拍照点</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">傍晚</div>
+          <div class="time-content">
+            <div class="time-en">Arrive Sedona · Chapel of Holy Cross</div>
+            <div class="time-cn">抵达塞多纳 · 圣十字教堂</div>
+            <div class="time-note-cn">1956年建于红岩峭壁之间，建筑与自然浑然一体，傍晚光线极美</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D8</div>
+        <div class="day-info">
+          <div class="day-date">Sat · 5/2</div>
+          <div class="day-title">Sedona Full Day</div>
+          <div class="day-title-cn">塞多纳全天游</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🥾</div>徒步日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Devil's Bridge Trail (3.9 mi round trip)</div>
+            <div class="time-cn">魔鬼桥步道（往返约6公里，中等难度）</div>
+            <div class="time-note-cn">塞多纳最受欢迎的步道，终点是天然沙岩拱桥，可以站在桥上拍绝世大片！建议早上8点前出发抢停车位</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Cathedral Rock · Pink Jeep Tour (optional)</div>
+            <div class="time-cn">大教堂岩 · 可选粉色越野吉普游（约$120/人）</div>
+            <div class="time-note-cn">大教堂岩倒影在Oak Creek上，是塞多纳最上镜的景色之一。越野吉普游可以到步行无法到达的秘境红岩地带</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 9 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D9</div>
+        <div class="day-info">
+          <div class="day-date">Sun · 5/3</div>
+          <div class="day-title">Sedona → Grand Canyon</div>
+          <div class="day-title-cn">塞多纳 → 大峡谷</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Drive to Grand Canyon · Mather Point</div>
+            <div class="time-cn">驾车前往大峡谷 · 抵达后立即去马瑟观景台</div>
+            <div class="time-note-cn">马瑟观景台是南缘最容易到达的观景台，俯瞰整个峡谷的第一眼往往让人震撼到说不出话</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">South Kaibab Trail (3 hrs) · Sunset at Hopi Point</div>
+            <div class="time-cn">南凯巴布步道徒步3小时 · 霍皮观景台看日落</div>
+            <div class="time-note-cn">南凯巴布步道可以走到峡谷内部，Ooh Aah Point（1.8英里）和Cedar Ridge（3英里）是推荐折返点，⚠️不建议下到谷底当天返回</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page -->
+    <div class="region-divider">💧 佩奇 Page · Lake Powell</div>
+
+    <!-- Day 10 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D10</div>
+        <div class="day-info">
+          <div class="day-date">Mon · 5/4</div>
+          <div class="day-title">Grand Canyon → Page · Horseshoe Bend</div>
+          <div class="day-title-cn">大峡谷 → 佩奇 · 马蹄湾</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Horseshoe Bend (1501 AZ-98)</div>
+            <div class="time-cn">马蹄湾（停车费$10，步行约20分钟到观景台）</div>
+            <div class="time-note-cn">科罗拉多河在这里形成近270度的U形弯，从270英尺高的悬崖边俯瞰令人腿软。下午2-4点光线最佳，⚠️ 悬崖无护栏注意安全！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 11 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D11</div>
+        <div class="day-info">
+          <div class="day-date">Tue · 5/5</div>
+          <div class="day-title">Antelope Canyon · Lake Powell</div>
+          <div class="day-title-cn">下羚羊峡谷 · 鲍威尔湖</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">📸</div>拍照日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Lower Antelope Canyon ⚠️ MUST PRE-BOOK guided tour</div>
+            <div class="time-cn">下羚羊峡谷 ⚠️ 必须提前预订导览团！navajotours.com</div>
+            <div class="time-note-cn">光柱效果出现在上午10点-下午12点之间，光线从缝隙射入形成神迹般的金色光柱。下峡谷比上峡谷人少、更壮观，约75分钟游览</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Glen Canyon Dam · Toadstool Hoodoos · Lone Rock Beach</div>
+            <div class="time-cn">格伦峡谷水坝 · 蟾蜍菌土柱 · 孤岩海滩</div>
+            <div class="time-note-cn">蟾蜍菌土柱是Page附近鲜为人知的惊喜，形似蘑菇的沙岩柱几乎无人排队，是布莱斯峡谷hoodoo的预览。孤岩海滩可以在鲍威尔湖沙滩上露营或戏水</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UTAH: BRYCE CANYON (NEW) -->
+    <div class="region-divider">🌅 犹他州 Utah — 布莱斯峡谷 ★ 新加入</div>
+
+    <!-- Day 12 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:#c0392b">D12</div>
+        <div class="day-info">
+          <div class="day-date">Wed · 5/6 <span class="new-badge">NEW</span></div>
+          <div class="day-title">Page → Bryce Canyon NP</div>
+          <div class="day-title-cn">佩奇 → 布莱斯峡谷国家公园</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>3.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Drive Page → Bryce Canyon (2 hrs)</div>
+            <div class="time-cn">驾车前往布莱斯峡谷（2小时）· Inspiration Point灵感观景台</div>
+            <div class="time-note-cn">比之前估计的快——只需2小时，下午有充足时间游览</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Navajo Loop Trail · Hoodoo amphitheater</div>
+            <div class="time-cn">纳瓦霍环线步道 · 橙红土柱群</div>
+            <div class="time-note-cn">这条2.9英里的步道穿越密集的hoodoo土柱群，走在橙红色石柱之间仿佛置身外星球。下午光线侧打石柱颜色最饱和</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">傍晚</div>
+          <div class="time-content">
+            <div class="time-en">Sunset Point · Rim Trail</div>
+            <div class="time-cn">日落观景台 · 峰顶栈道看日落</div>
+            <div class="time-note-cn">布莱斯海拔约9000英尺，日落时橙红色土柱在金光照耀下如烈焰燃烧，是全程最梦幻的日落之一<br>📍 住宿：115 S Main St, Hatch, UT（布莱斯峡谷附近小镇）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 13 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:#c0392b">D13</div>
+        <div class="day-info">
+          <div class="day-date">Thu · 5/7 <span class="new-badge">NEW</span></div>
+          <div class="day-title">Bryce → Zion (drive-thru) → Las Vegas</div>
+          <div class="day-title-cn">布莱斯 → 锡安路过 → 拉斯维加斯</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>4 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">早晨</div>
+          <div class="time-content">
+            <div class="time-en">Sunrise Point · Inspiration Point</div>
+            <div class="time-cn">日出观景台 · 灵感观景台看日出</div>
+            <div class="time-note-cn">布莱斯的日出和日落同样著名。早起5:30出发可以独享清晨宁静，橙粉色天光映在土柱上极美</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Drive via Zion UT-9 · Canyon Overlook Trail (30 min)</div>
+            <div class="time-cn">穿越锡安东侧公路 · Canyon Overlook步道打卡（30分钟）</div>
+            <div class="time-note-cn">UT-9公路本身穿越锡安，风景已非常震撼。Canyon Overlook Trail是1英里轻松步道，可以俯瞰整个锡安峡谷，不需要专程进公园坐班车</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">晚上</div>
+          <div class="time-content">
+            <div class="time-en">Arrive Las Vegas · MGM Grand check in</div>
+            <div class="time-cn">抵达拉斯维加斯，入住米高梅大酒店（MGM Grand）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vegas -->
+    <div class="region-divider">🎰 内华达 Nevada · Las Vegas</div>
+
+    <!-- Day 14 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D14</div>
+        <div class="day-info">
+          <div class="day-date">Fri · 5/8</div>
+          <div class="day-title">Las Vegas Full Day</div>
+          <div class="day-title-cn">拉斯维加斯全天游</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🎰</div>Vegas日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Las Vegas Strip walk · Bellagio Fountains (free)</div>
+            <div class="time-cn">拉斯维加斯大道漫游 · 贝拉吉奥喷泉（免费）</div>
+            <div class="time-note-cn">威尼斯人运河、凯撒宫、纽约纽约、埃菲尔铁塔复制品…不赌钱也可以在大道上逛半天。喷泉每隔15-30分钟一次，夜晚最美</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Fremont Street Experience · High Roller (optional $25)</div>
+            <div class="time-cn">弗里蒙特街 LED 天幕夜市 · 高滚轮摩天轮（可选 $25）</div>
+            <div class="time-note-cn">弗里蒙特街有全球最大LED天幕（460米长），每晚整点有免费灯光秀。高滚轮550英尺高，30分钟转一圈，可以俯瞰整个Strip全景</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">晚上</div>
+          <div class="time-content">
+            <div class="time-en">Dinner on the Strip · MGM Grand</div>
+            <div class="time-cn">Strip上吃晚餐 · 回米高梅大酒店休息</div>
+            <div class="time-note-cn">📍 住宿：MGM Grand Hotel &amp; Casino</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sequoia & Yosemite -->
+    <div class="region-divider">🌲 加州国家公园 California Parks</div>
+
+    <!-- Day 15 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D15</div>
+        <div class="day-info">
+          <div class="day-date">Sat · 5/9 ★</div>
+          <div class="day-title">Vegas → Death Valley (drive-thru) → Visalia</div>
+          <div class="day-title-cn">Vegas → 死亡谷路过 → 维萨利亚</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>~5.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">早晨</div>
+          <div class="time-content">
+            <div class="time-en">⚠️ Depart Vegas early morning!</div>
+            <div class="time-cn">⚠️ 清晨早出发！（建议7点前出发）</div>
+            <div class="time-note-cn">今天全程约5.5小时，加上停留时间，需要尽早出发才能在天黑前抵达Visalia</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Badwater Basin · Zabriskie Point</div>
+            <div class="time-cn">巴德沃特盐滩（北美最低点）· 扎布里斯基观景台</div>
+            <div class="time-note-cn">Badwater Basin：-282英尺，六边形盐晶铺满地面，超现实感十足。Zabriskie Point：金色丘陵地貌，像置身火星。两处各停约45分钟</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Continue drive to Visalia · check in Airbnb</div>
+            <div class="time-cn">继续驾车前往维萨利亚 · 入住爱彼迎</div>
+            <div class="time-note-cn">📍 Airbnb · 213 W Tyler Ave, Visalia, CA（距红杉公园约1.5小时）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 16 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D16</div>
+        <div class="day-info">
+          <div class="day-date">Sun · 5/10</div>
+          <div class="day-title">Sequoia + Kings Canyon NP</div>
+          <div class="day-title-cn">红杉 + 国王峡谷国家公园</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🌲</div>公园日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Drive 1.5 hr to park · General Sherman Tree + Congress Trail</div>
+            <div class="time-cn">驾车1.5小时进公园 · 谢尔曼将军树 + 国会步道</div>
+            <div class="time-note-cn">谢尔曼将军树是地球上体积最大的活树（275英尺高，腰围102英尺）。建议一进公园就直奔这里，人少光线好</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Kings Canyon NP · Canyon Scenic Byway</div>
+            <div class="time-cn">国王峡谷国家公园 · 峡谷景观公路</div>
+            <div class="time-note-cn">两个公园共用一张门票（$35/车），Kings Canyon以深邃峡谷和将军格兰特树（全球第二大树）著称，峡谷景观公路沿途瀑布、草甸、花岗岩峭壁令人震撼</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">傍晚</div>
+          <div class="time-content">
+            <div class="time-en">Return to Visalia Airbnb</div>
+            <div class="time-cn">返回维萨利亚爱彼迎休息</div>
+            <div class="time-note-cn">📍 Airbnb · 213 W Tyler Ave, Visalia, CA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 17 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D17</div>
+        <div class="day-info">
+          <div class="day-date">Mon · 5/11</div>
+          <div class="day-title">Visalia → Yosemite</div>
+          <div class="day-title-cn">维萨利亚 → 优胜美地</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Drive to Yosemite · Tunnel View vista</div>
+            <div class="time-cn">驾车前往优胜美地 · 隧道观景台</div>
+            <div class="time-note-cn">从隧道出来的瞬间，El Capitan、Half Dome、Bridalveil Falls同时出现在视野中——这是全美最著名的公路出口景色之一</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Yosemite Falls · El Capitan Meadow</div>
+            <div class="time-cn">优胜美地瀑布 · 酋长岩草地观景</div>
+            <div class="time-note-cn">5月瀑布水量最大，高2425英尺。从草地仰望El Capitan三千英尺垂直岩壁震撼至极<br>📍 住宿：Yosemite Valley View Hotel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 18 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D18</div>
+        <div class="day-info">
+          <div class="day-date">Tue · 5/12</div>
+          <div class="day-title">Yosemite Full Day</div>
+          <div class="day-title-cn">优胜美地全天游</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🥾</div>徒步日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Mist Trail → Vernal Fall (3.6 mi round trip)</div>
+            <div class="time-cn">水雾步道 → 弗纳尔瀑布（往返约6公里，中等）</div>
+            <div class="time-note-cn">5月雪融期间水量最大，走近瀑布会被水雾打湿，建议带雨衣！步道最后一段是陡峭石阶，登顶后看到瀑布全景完全值得</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Valley View · Mirror Lake · Cook's Meadow loop</div>
+            <div class="time-cn">山谷观景台 · 镜湖（Half Dome倒影）· 库克草甸环线</div>
+            <div class="time-note-cn">镜湖5月水位最高，Half Dome倒影最清晰，是全程最上镜的景色之一<br>📍 住宿：Yosemite Valley View Hotel（连住第2晚）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 18-20 -->
+    <div class="region-divider">🌉 返回 Return to San Francisco</div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D19</div>
+        <div class="day-info">
+          <div class="day-date">Wed · 5/13</div>
+          <div class="day-title">Yosemite → San Francisco</div>
+          <div class="day-title-cn">优胜美地 → 返回旧金山</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>4.5 hr</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge pm">下午</div>
+          <div class="time-content">
+            <div class="time-en">Drive back to SF · Arrive afternoon</div>
+            <div class="time-cn">驾车返回旧金山 · 下午抵达</div>
+          </div>
+        </div>
+        <div class="time-row">
+          <div class="time-badge eve">晚上</div>
+          <div class="time-content">
+            <div class="time-en">Fisherman's Wharf · Final dinner in SF</div>
+            <div class="time-cn">渔人码头 · 旧金山最后一顿晚餐</div>
+            <div class="time-note-cn">推荐在码头吃新鲜海鲜汤（Clam Chowder面包碗），为整段旅程画上完美句号<br>📍 住宿：DoubleTree by Hilton San Francisco Airport North Bayfront</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">D20</div>
+        <div class="day-info">
+          <div class="day-date">Thu · 5/14</div>
+          <div class="day-title">Fly Home 🛫</div>
+          <div class="day-title-cn">启程回国</div>
+        </div>
+        <div class="day-drive"><div class="drive-icon">✈️</div>回国日</div>
+        <div class="day-expand">›</div>
+      </div>
+      <div class="day-body">
+        <div class="time-row">
+          <div class="time-badge am">上午</div>
+          <div class="time-content">
+            <div class="time-en">Check out by 11 am · Fly home at noon</div>
+            <div class="time-cn">上午11点退房 · 中午乘机回国</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /itinerary section -->
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION 2: ATTRACTIONS             -->
+<!-- ════════════════════════════════════ -->
+<div class="section" id="sec-attractions">
+  <div class="sec-header">
+    <h2>景点清单 Attractions</h2>
+    <p>点击卡片打勾 · Tap to check off · <span id="check-count">0</span> / 30 已选</p>
+  </div>
+  <div class="container" style="padding-top:24px">
+
+    <div class="region-divider">🌉 旧金山 San Francisco</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌉</div>
+        <div class="attr-name">Golden Gate Bridge</div>
+        <div class="attr-name-cn">金门大桥</div>
+        <div class="attr-desc">Iconic 1937 suspension bridge, 1.7 miles long</div>
+        <div class="attr-desc-cn">1937年建成，橙红色悬索桥，全长2.7公里，是旧金山最标志性建筑</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D2</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🦭</div>
+        <div class="attr-name">Pier 39 · Sea Lions</div>
+        <div class="attr-name-cn">39号码头 · 海狮</div>
+        <div class="attr-desc">Free sea lion viewing, sunset views, fresh seafood</div>
+        <div class="attr-desc-cn">数百头野生海狮栖息于此，每天自然聚集，完全免费观赏，是旧金山最受欢迎景点之一</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D1</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌺</div>
+        <div class="attr-name">Lombard Street</div>
+        <div class="attr-name-cn">伦巴底街（九曲花街）</div>
+        <div class="attr-desc">World's crookedest street, beautiful flower-lined curves</div>
+        <div class="attr-desc-cn">世界最弯曲街道，8个急弯下坡，两侧四季鲜花盛开，是旧金山打卡必去</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D1</span></div>
+      </div>
+    </div>
+
+    <div class="region-divider">🌊 中央海岸 Central Coast</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🛣️</div>
+        <div class="attr-name">17-Mile Drive</div>
+        <div class="attr-name-cn">17英里景观公路</div>
+        <div class="attr-desc">Scenic private road through Pebble Beach, ~$12/car</div>
+        <div class="attr-desc-cn">穿越卵石滩高尔夫球场的私人景观公路，沿途有独树岩、象海豹聚集地，约需2小时</div>
+        <div class="attr-tags"><span class="attr-tag">$12/车</span><span class="attr-tag">D3</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌉</div>
+        <div class="attr-name">Bixby Creek Bridge</div>
+        <div class="attr-name-cn">比克斯比桥 · 大苏尔</div>
+        <div class="attr-desc">Most photographed bridge on Pacific Coast Highway</div>
+        <div class="attr-desc-cn">1932年建成，高80米悬于峭壁之上，是太平洋海岸公路上最上镜的地标</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D4</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">💧</div>
+        <div class="attr-name">McWay Falls</div>
+        <div class="attr-name-cn">麦克威瀑布</div>
+        <div class="attr-desc">80ft waterfall falling directly onto the beach</div>
+        <div class="attr-desc-cn">世界上极稀有的直接落入太平洋的瀑布，步行10分钟即可到达观景台</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D4</span></div>
+      </div>
+    </div>
+
+    <div class="region-divider">🎬 洛杉矶 Los Angeles</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🎬</div>
+        <div class="attr-name">Hollywood Sign + Griffith Observatory</div>
+        <div class="attr-name-cn">好莱坞标志 + 格里菲斯天文台</div>
+        <div class="attr-desc">Iconic sign, best viewed from Griffith with LA panorama</div>
+        <div class="attr-desc-cn">从格里菲斯天文台可以同时看到Hollywood招牌和整个LA全景，是最高效的两景合一打法</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D5</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🦎</div>
+        <div class="attr-name">Joshua Tree NP · Skull Rock</div>
+        <div class="attr-name-cn">约书亚树国家公园 · 骷髅岩</div>
+        <div class="attr-desc">Unique desert landscape, star-gazing paradise at night</div>
+        <div class="attr-desc-cn">独特的约书亚树沙漠景观，夜晚星空是全美最壮观的之一，骷髅岩是天然侵蚀奇景</div>
+        <div class="attr-tags"><span class="attr-tag">$35/车</span><span class="attr-tag">D6</span></div>
+      </div>
+    </div>
+
+    <div class="region-divider">🏜 亚利桑那 Arizona</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">⛪</div>
+        <div class="attr-name">Chapel of Holy Cross · Sedona</div>
+        <div class="attr-name-cn">圣十字教堂 · 塞多纳</div>
+        <div class="attr-desc">1956 chapel built into the red rocks, spiritual landmark</div>
+        <div class="attr-desc-cn">由雕塑家Marguerite Brunswig Staude建于红岩峭壁之间，是塞多纳最具代表性的建筑地标</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D7</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌉</div>
+        <div class="attr-name">Devil's Bridge · Sedona</div>
+        <div class="attr-name-cn">魔鬼桥 · 塞多纳</div>
+        <div class="attr-desc">Largest natural sandstone arch in Sedona region</div>
+        <div class="attr-desc-cn">塞多纳地区最大的天然沙岩拱桥，站在桥上俯瞰红岩峡谷，往返约6公里，建议早出发</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D8</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🏞</div>
+        <div class="attr-name">Grand Canyon South Rim</div>
+        <div class="attr-name-cn">大峡谷南缘</div>
+        <div class="attr-desc">World's most spectacular canyon, 277 miles long, 1 mile deep</div>
+        <div class="attr-desc-cn">全长446公里，深达1.6公里，科罗拉多河历经数百万年切割形成，是地球地质历史的天然博物馆</div>
+        <div class="attr-tags"><span class="attr-tag">$35/车</span><span class="attr-tag">D9</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌊</div>
+        <div class="attr-name">Horseshoe Bend</div>
+        <div class="attr-name-cn">马蹄湾</div>
+        <div class="attr-desc">Colorado River's perfect 270° U-shaped curve</div>
+        <div class="attr-desc-cn">科罗拉多河形成270度U形弯，从270英尺高悬崖俯瞰震撼无比。停车$10，步行约20分钟</div>
+        <div class="attr-tags"><span class="attr-tag">$10停车</span><span class="attr-tag">D10</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌀</div>
+        <div class="attr-name">Lower Antelope Canyon</div>
+        <div class="attr-name-cn">下羚羊峡谷</div>
+        <div class="attr-desc">Slot canyon with divine light beams 10am-12pm</div>
+        <div class="attr-desc-cn">光柱出现在上午10点-12点之间。纳瓦霍族圣地，必须跟导览团入内。摄影效果堪称世界最美峡谷</div>
+        <div class="attr-tags"><span class="attr-tag">需预订</span><span class="attr-tag">D11</span></div>
+      </div>
+    </div>
+
+    <div class="region-divider">🌅 犹他州 Utah ★</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🏛</div>
+        <div class="attr-name">Bryce Canyon · Navajo Loop</div>
+        <div class="attr-name-cn">布莱斯峡谷 · 纳瓦霍环线</div>
+        <div class="attr-desc">World's largest concentration of hoodoo spires</div>
+        <div class="attr-desc-cn">地球上hoodoo土柱密度最高的地方，橙红紫白各色石柱密布，像一座天然雕塑博物馆</div>
+        <div class="attr-tags"><span class="attr-tag">★新加入</span><span class="attr-tag">$35/车</span><span class="attr-tag">D12</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌄</div>
+        <div class="attr-name">Bryce Sunrise Point</div>
+        <div class="attr-name-cn">布莱斯日出观景台</div>
+        <div class="attr-desc">Most spectacular sunrise view over the hoodoos</div>
+        <div class="attr-desc-cn">清晨橙色光线斜射在土柱上，色温极暖，是全程最推荐的日出体验之一</div>
+        <div class="attr-tags"><span class="attr-tag">★新加入</span><span class="attr-tag">D13</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🏔</div>
+        <div class="attr-name">Zion Canyon Overlook Trail</div>
+        <div class="attr-name-cn">锡安峡谷观景步道（路过打卡）</div>
+        <div class="attr-desc">1-mile easy trail overlooking entire Zion Canyon</div>
+        <div class="attr-desc-cn">仅1英里的轻松步道，可以俯瞰整个锡安峡谷全景，在UT-9公路边，路过时停留30分钟即可</div>
+        <div class="attr-tags"><span class="attr-tag">路过打卡</span><span class="attr-tag">D13</span></div>
+      </div>
+    </div>
+
+    <div class="region-divider">🎰 内华达 & 加州 Nevada & California</div>
+    <div class="attraction-grid">
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🎰</div>
+        <div class="attr-name">Las Vegas Strip · Bellagio Fountains</div>
+        <div class="attr-name-cn">拉斯维加斯大道 · 贝拉吉奥喷泉</div>
+        <div class="attr-desc">World's entertainment capital, free fountain show every 30 min</div>
+        <div class="attr-desc-cn">贝拉吉奥喷泉免费，每隔15-30分钟表演一次，夜晚配合音乐灯光极为壮观。威尼斯人运河、埃菲尔铁塔复制品都值得进去看看</div>
+        <div class="attr-tags"><span class="attr-tag">喷泉免费</span><span class="attr-tag">D14</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🧂</div>
+        <div class="attr-name">Badwater Basin · Death Valley</div>
+        <div class="attr-name-cn">巴德沃特盐滩 · 死亡谷</div>
+        <div class="attr-desc">Lowest point in North America at -282 ft, endless salt flats</div>
+        <div class="attr-desc-cn">北美最低点（海拔下282英尺），六边形盐晶铺满地面，超现实感十足，早出发可以避开正午高温</div>
+        <div class="attr-tags"><span class="attr-tag">路过停留</span><span class="attr-tag">D14</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🌲</div>
+        <div class="attr-name">General Sherman Tree · Sequoia</div>
+        <div class="attr-name-cn">谢尔曼将军树 · 红杉国家公园</div>
+        <div class="attr-desc">World's largest tree by volume, 275 ft tall, 2,200 years old</div>
+        <div class="attr-desc-cn">地球上体积最大的活树，高84米，腰围31米，树龄约2200年。站在树下仰望的震撼感无法用语言描述</div>
+        <div class="attr-tags"><span class="attr-tag">$35/车</span><span class="attr-tag">D15</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🏔</div>
+        <div class="attr-name">Yosemite Valley · El Capitan</div>
+        <div class="attr-name-cn">优胜美地山谷 · 酋长岩</div>
+        <div class="attr-desc">3,000 ft vertical granite wall, world's most famous rock climb</div>
+        <div class="attr-desc-cn">酋长岩是全球最著名的攀岩地，近1000米垂直花岗岩壁，从山谷草地仰望令人叹为观止</div>
+        <div class="attr-tags"><span class="attr-tag">$35/车</span><span class="attr-tag">D16</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">💦</div>
+        <div class="attr-name">Mist Trail · Vernal Fall</div>
+        <div class="attr-name-cn">水雾步道 · 弗纳尔瀑布</div>
+        <div class="attr-desc">Most popular hike in Yosemite, stunning waterfall up close</div>
+        <div class="attr-desc-cn">优胜美地最受欢迎的步道，5月雪融时水量最大，走近瀑布会被水雾打湿，带雨衣！往返约6公里</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D17</span></div>
+      </div>
+      <div class="attr-card" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="attr-icon">🔮</div>
+        <div class="attr-name">Mirror Lake · Half Dome Reflection</div>
+        <div class="attr-name-cn">镜湖 · 半圆顶倒影</div>
+        <div class="attr-desc">Perfect Half Dome reflection, best in May</div>
+        <div class="attr-desc-cn">5月雪融水位最高，Half Dome完美倒映在湖中，是优胜美地最上镜的景色之一</div>
+        <div class="attr-tags"><span class="attr-tag">免费</span><span class="attr-tag">D17</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION 3: HISTORY                 -->
+<!-- ════════════════════════════════════ -->
+<div class="section" id="sec-history">
+  <div class="sec-header">
+    <h2>历史文化背景 History & Culture</h2>
+    <p>了解每个地方背后的故事 · The stories behind the places</p>
+  </div>
+  <div class="container">
+    <div class="history-section">
+
+      <div class="history-block">
+        <h3>Golden Gate Bridge <span>金门大桥</span></h3>
+        <p>Built between 1933–1937 during the Great Depression, the Golden Gate Bridge was considered an engineering impossibility. Chief engineer Joseph Strauss convinced the city it could be done. At the time of completion, it was the world's longest suspension bridge at 4,200 ft. Over 11 million cubic feet of concrete and 83,000 tons of steel were used. The iconic orange-vermilion color (officially "International Orange") was originally a primer chosen to protect against salt air—and it stuck.</p>
+        <p class="cn">金门大桥建于1933-1937年大萧条时期，当时被认为是工程学上的不可能任务。总工程师Joseph Strauss说服了旧金山市政府。建成时是全世界最长的悬索桥（1280米）。标志性的橙红色（官方称"国际橙"）其实源于防腐底漆——工程师觉得好看就保留了下来。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Highway 1 & Big Sur <span>1号公路与大苏尔</span></h3>
+        <p>California Highway 1 along the Big Sur coast took 18 years to build (1919–1937) with convict labor. The rugged 90-mile stretch through Big Sur was nearly impossible terrain. The region was called "Big Sur" by early Spanish settlers—"el sur grande" meaning "the big south." John Steinbeck, Henry Miller, and Jack Kerouac all lived and wrote here, making it an artistic mecca. Bixby Bridge was built in 1932 and at 80m high was one of the tallest bridges in the world at the time.</p>
+        <p class="cn">大苏尔海岸段1号公路耗时18年（1919-1937），由囚犯劳工修建。"Big Sur"来自西班牙语"el sur grande"（大南方）。约翰·斯坦贝克、亨利·米勒、杰克·凯鲁亚克都曾在这里居住和写作，使其成为美国文学与艺术的圣地。1932年建成的比克斯比桥，高80米，是当时全美最高桥梁之一。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Sedona Red Rocks <span>塞多纳红岩</span></h3>
+        <p>Sedona's red rocks were formed over 300 million years ago when the region was covered by shallow seas and then uplifted. The iron oxide (rust) in the sandstone gives them the vivid red color. Native Americans—particularly the Yavapai and Apache—considered Sedona sacred land, using its vortexes (energy centers) for spiritual ceremonies. Today, Sedona is known as a New Age spiritual hub, with many believing the rock formations emit powerful energy.</p>
+        <p class="cn">塞多纳的红岩形成于3亿年前，当时整个地区被浅海覆盖，之后地壳抬升，砂岩中的氧化铁（铁锈）赋予了它鲜艳的红色。原住民Yavapai和Apache族将其视为圣地，在此举行宗教仪式。如今塞多纳是美国知名的"能量旋涡"（Vortex）灵性中心，吸引大批寻求心灵疗愈的人前来。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Grand Canyon <span>大峡谷</span></h3>
+        <p>The Colorado River has been carving the Grand Canyon for 5–6 million years, exposing rock layers up to 1.8 billion years old—nearly half the age of Earth. Native tribes including the Havasupai have lived in and around the canyon for over 800 years. President Theodore Roosevelt visited in 1903 and declared: "Do nothing to mar its grandeur." He established it as a National Monument in 1908 and it became a National Park in 1919. The canyon is 277 miles long, up to 18 miles wide, and over a mile deep.</p>
+        <p class="cn">科罗拉多河用了500-600万年切割出大峡谷，最深处暴露的岩层已有18亿年历史——接近地球年龄的一半。Havasupai原住民在峡谷内定居已超过800年。西奥多·罗斯福总统1903年造访后宣称"不要破坏它的壮丽"，并于1908年将其设为国家纪念地，1919年正式升格为国家公园。峡谷全长446公里，最宽29公里，深达1.6公里。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Antelope Canyon & Navajo Nation <span>羚羊峡谷与纳瓦霍族</span></h3>
+        <p>Antelope Canyon is located within the Navajo Nation—the largest Native American reservation in the US, covering 71,000 sq km across Arizona, Utah, and New Mexico. The canyon was formed by flash floods over millions of years, slowly carving the smooth undulating walls. In Navajo language, Lower Antelope Canyon is called "Hazdistazí" (spiral rock arches). The canyon is entirely managed by the Navajo people—all tours must be led by licensed Navajo guides. Revenue supports the local community.</p>
+        <p class="cn">羚羊峡谷位于纳瓦霍族保留地——美国最大的原住民保留区，面积达7.1万平方公里，横跨亚利桑那、犹他、新墨西哥三州。峡谷由洪水历经数百万年冲刷而成，光滑波浪状的砂岩壁是其标志。下羚羊峡谷的纳瓦霍名称是"Hazdistazí"（螺旋岩拱）。峡谷完全由纳瓦霍人管理，所有旅游收入用于支持当地社区。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Bryce Canyon Hoodoos <span>布莱斯峡谷土柱</span></h3>
+        <p>Bryce Canyon is not technically a canyon but an amphitheater of eroded rock formed by frost wedging and the headward erosion of the Paria River. The hoodoos (rock spires) form when soft rock erodes away but harder cap rocks protect the pillars below. The Paiute people called the hoodoos "Angka-ku-wass-a-wits" meaning "red painted faces." Mormon pioneer Ebenezer Bryce settled here in 1875 and reportedly called it "a hell of a place to lose a cow." It became a National Park in 1928.</p>
+        <p class="cn">布莱斯峡谷其实不是"峡谷"，而是冰冻风化和河流侵蚀形成的天然圆形剧场。Hoodoo土柱的形成原理是：软岩被侵蚀，而顶部较硬的岩层保护了下面的柱体。Paiute族原住民称这些土柱为"Angka-ku-wass-a-wits"（红色涂面）。摩门拓荒者Ebenezer Bryce于1875年定居于此，据说称其为"丢失奶牛的地狱"。1928年成为国家公园。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Las Vegas <span>拉斯维加斯</span></h3>
+        <p>Las Vegas means "The Meadows" in Spanish—early Spanish explorers found artesian wells here in the desert. The city was founded in 1905 as a railroad town. Gambling was legalized in Nevada in 1931 during the Great Depression, and the mob—particularly Bugsy Siegel—transformed it into the entertainment capital with the opening of the Flamingo Hotel in 1946. Today it hosts 40 million visitors per year. The famous "Strip" (Las Vegas Blvd) is technically in the unincorporated communities of Paradise and Winchester, not the city of Las Vegas itself.</p>
+        <p class="cn">"Las Vegas"在西班牙语中意为"草地"——早期探险家在沙漠中发现了自流井。1905年作为铁路小镇建立。1931年大萧条期间内华达州将赌博合法化。黑手党人物Bugsy Siegel于1946年开设火烈鸟酒店，将其变成娱乐之都。如今每年接待4000万游客。著名的"Strip"（拉斯维加斯大道）在技术上属于Paradise和Winchester无建制社区，并不在拉斯维加斯市内。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Death Valley <span>死亡谷</span></h3>
+        <p>Death Valley got its name in 1849 when a group of emigrants crossed it while searching for a shortcut to California's gold fields. Only one person died, but upon leaving one man allegedly turned back and said "Goodbye, Death Valley." It holds the world record for highest reliably recorded air temperature: 134°F (56.7°C) on July 10, 1913. The Timbisha Shoshone people have lived here for over 1,000 years. Badwater Basin at -282ft is the lowest point in North America—yet you can see Mt. Whitney, the highest point in the contiguous US (14,505ft), just 85 miles away.</p>
+        <p class="cn">死亡谷的名字来源于1849年，一批寻找捷径前往加州淘金的移民穿越此地，只有一人死亡，但离开时有人回头说了一句"再见了，死亡谷"。它保持着全球最高可靠气温纪录：1913年7月10日录得56.7°C。Timbisha Shoshone族原住民在此生活了超过1000年。巴德沃特盆地（-86米）是北美最低点，却能在85英里外看到北美大陆最高峰惠特尼山（4418米）。</p>
+      </div>
+
+      <div class="history-block">
+        <h3>Giant Sequoia & Yosemite <span>红杉与优胜美地</span></h3>
+        <p>Giant Sequoias are the world's largest trees by volume and can live over 3,000 years. They only grow naturally on the western slopes of California's Sierra Nevada. Fire is essential to their reproduction—their cones can remain on the tree for 20 years until heat from a wildfire opens them. Yosemite was the first land set aside by the US government for public preservation in 1864—predating Yellowstone as the first national park. John Muir, the "Father of National Parks," championed Yosemite. El Capitan's 3,000-ft granite wall was first scaled in 1958 after 47 days of climbing.</p>
+        <p class="cn">巨杉是地球上体积最大的活树，寿命可超过3000年，只自然生长于加州Sierra Nevada山脉西坡。火灾对其繁殖至关重要——球果可在树上保存20年，直到野火的热量将其打开散播种子。优胜美地于1864年成为美国第一块由政府划定保护的土地（早于黄石公园）。"国家公园之父"约翰·缪尔为其奔走呼号。酋长岩3000英尺花岗岩壁于1958年首次被攀登，历时47天。</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION 4: TIPS                    -->
+<!-- ════════════════════════════════════ -->
+<!-- ════════════════════════════════════ -->
+<!-- SECTION: OUTFIT COLOR GUIDE        -->
+<!-- ════════════════════════════════════ -->
+<div class="section" id="sec-outfit">
+  <div class="sec-header">
+    <h2>穿搭配色指南 Outfit Color Guide</h2>
+    <p>根据每个景点的背景色选对衣服，照片效果翻倍 · Pick colors that pop against each landscape</p>
+  </div>
+  <div class="container" style="padding-top:24px">
+
+    <div class="info-box" style="background:#fff8e7;border-left:4px solid #c9943a;border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:24px;font-size:13px;color:#5a4a2a;font-family:'Noto Serif SC',serif;line-height:1.8;">
+      💡 <strong>核心原则：</strong>穿与背景<strong>对比色</strong>最出片，穿与背景<strong>相近色</strong>会融入背景消失。例如红色岩石前不穿橙红，绿色森林前不穿深绿。
+    </div>
+
+    <!-- SF & COAST -->
+    <div class="region-divider">🌉 旧金山 · 中央海岸</div>
+
+    <div class="outfit-card">
+      <div class="outfit-scene">
+        <div class="scene-palette">
+          <div class="swatch" style="background:#4a6fa5" title="蓝天"></div>
+          <div class="swatch" style="background:#c0a882" title="岩石"></div>
+          <div class="swatch" style="background:#6b8e6e" title="植被"></div>
+          <div class="swatch" style="background:#b8cce0" title="海水"></div>
+        </div>
+        <div class="scene-info">
+          <div class="scene-title">Golden Gate Bridge · Big Sur · Morro Bay</div>
+          <div class="scene-title-cn">金门大桥 · 大苏尔 · 莫罗湾</div>
+          <div class="scene-bg">背景色：蓝天、灰棕岩石、蓝绿海水</div>
+        </div>
+      </div>
+      <div class="outfit-recs">
+        <div class="rec good">
+          <div class="rec-label">✅ 推荐</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
+            <div class="rec-swatch" style="background:#e8c97a"><span>金黄</span></div>
+            <div class="rec-swatch" style="background:#fff"><span>纯白</span></div>
+            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
+            <div class="rec-swatch" style="background:#f39c12"><span>橙黄</span></div>
+          </div>
+          <div class="rec-note">红色在蓝色大桥和海水前极抢眼；白色在蓝天映衬下干净清爽；金黄色与大桥橙红色相呼应</div>
+        </div>
+        <div class="rec bad">
+          <div class="rec-label">❌ 避免</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch avoid" style="background:#4a6fa5"><span>蓝色</span></div>
+            <div class="rec-swatch avoid" style="background:#6b8e6e"><span>深绿</span></div>
+            <div class="rec-swatch avoid" style="background:#b8cce0"><span>浅蓝</span></div>
+          </div>
+          <div class="rec-note">蓝色和海天背景融为一体，照片里人会"消失"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEDONA / GRAND CANYON / BRYCE -->
+    <div class="region-divider">🏜 塞多纳 · 大峡谷 · 布莱斯峡谷 · 死亡谷</div>
+
+    <div class="outfit-card">
+      <div class="outfit-scene">
+        <div class="scene-palette">
+          <div class="swatch" style="background:#c0392b" title="红岩"></div>
+          <div class="swatch" style="background:#e67e22" title="橙色石柱"></div>
+          <div class="swatch" style="background:#d4a843" title="黄沙"></div>
+          <div class="swatch" style="background:#ecf0f1" title="白色石灰岩"></div>
+          <div class="swatch" style="background:#5d6d7e" title="阴影"></div>
+        </div>
+        <div class="scene-info">
+          <div class="scene-title">Sedona · Grand Canyon · Bryce Canyon · Death Valley</div>
+          <div class="scene-title-cn">塞多纳 · 大峡谷 · 布莱斯峡谷 · 死亡谷</div>
+          <div class="scene-bg">背景色：大量红色、橙色、黄沙色岩石</div>
+        </div>
+      </div>
+      <div class="outfit-recs">
+        <div class="rec good">
+          <div class="rec-label">✅ 强烈推荐</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch" style="background:#2980b9"><span>蓝色</span></div>
+            <div class="rec-swatch" style="background:#1a5276"><span>深蓝/海军蓝</span></div>
+            <div class="rec-swatch" style="background:#2ecc71"><span>草绿</span></div>
+            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
+            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
+            <div class="rec-swatch" style="background:#1abc9c"><span>蓝绿</span></div>
+          </div>
+          <div class="rec-note">蓝色是红色的对比色，在红岩前最抢眼！这是摄影师最常推荐的搭配。白色也很好，纯净感强烈。布莱斯峡谷橙白相间，蓝色在这里效果绝佳</div>
+        </div>
+        <div class="rec bad">
+          <div class="rec-label">❌ 必须避免</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch avoid" style="background:#c0392b"><span>红色</span></div>
+            <div class="rec-swatch avoid" style="background:#e67e22"><span>橙色</span></div>
+            <div class="rec-swatch avoid" style="background:#d4a843"><span>卡其/沙色</span></div>
+            <div class="rec-swatch avoid" style="background:#e8b89a"><span>珊瑚粉</span></div>
+          </div>
+          <div class="rec-note">红橙珊瑚色在红岩前完全融化消失，拍照几乎看不见人！这是最常见的错误</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOSHUA TREE / ANTELOPE -->
+    <div class="region-divider">🌵 约书亚树 · 羚羊峡谷 · 马蹄湾</div>
+
+    <div class="outfit-card">
+      <div class="outfit-scene">
+        <div class="scene-palette">
+          <div class="swatch" style="background:#c8a87a" title="沙漠金沙"></div>
+          <div class="swatch" style="background:#b5651d" title="红棕沙岩"></div>
+          <div class="swatch" style="background:#87ceeb" title="蓝天"></div>
+          <div class="swatch" style="background:#8b7355" title="棕色岩壁"></div>
+        </div>
+        <div class="scene-info">
+          <div class="scene-title">Joshua Tree · Antelope Canyon · Horseshoe Bend</div>
+          <div class="scene-title-cn">约书亚树 · 羚羊峡谷 · 马蹄湾</div>
+          <div class="scene-bg">背景色：沙漠金沙、红棕岩壁、蓝绿科罗拉多河</div>
+        </div>
+      </div>
+      <div class="outfit-recs">
+        <div class="rec good">
+          <div class="rec-label">✅ 推荐</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch" style="background:#2980b9"><span>蓝色</span></div>
+            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
+            <div class="rec-swatch" style="background:#c0392b"><span>红色</span></div>
+            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
+            <div class="rec-swatch" style="background:#16a085"><span>蓝绿</span></div>
+          </div>
+          <div class="rec-note">羚羊峡谷光线昏暗，穿亮色或白色效果更好。马蹄湾俯瞰时背景是蓝绿河水，红色或白色在空中拍最抢眼</div>
+        </div>
+        <div class="rec bad">
+          <div class="rec-label">❌ 避免</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch avoid" style="background:#c8a87a"><span>卡其/米色</span></div>
+            <div class="rec-swatch avoid" style="background:#b5651d"><span>棕色</span></div>
+            <div class="rec-swatch avoid" style="background:#d4a843"><span>沙色</span></div>
+          </div>
+          <div class="rec-note">与沙漠色系太接近，人融入背景</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAS VEGAS -->
+    <div class="region-divider">🎰 拉斯维加斯</div>
+
+    <div class="outfit-card">
+      <div class="outfit-scene">
+        <div class="scene-palette">
+          <div class="swatch" style="background:#1a1a2e" title="夜晚黑色"></div>
+          <div class="swatch" style="background:#f1c40f" title="霓虹黄金"></div>
+          <div class="swatch" style="background:#e74c3c" title="霓虹红"></div>
+          <div class="swatch" style="background:#9b59b6" title="霓虹紫"></div>
+        </div>
+        <div class="scene-info">
+          <div class="scene-title">Las Vegas Strip · Night Lights</div>
+          <div class="scene-title-cn">拉斯维加斯大道 · 夜晚霓虹</div>
+          <div class="scene-bg">背景色：夜晚黑色 + 五彩霓虹灯</div>
+        </div>
+      </div>
+      <div class="outfit-recs">
+        <div class="rec good">
+          <div class="rec-label">✅ 夜晚推荐</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
+            <div class="rec-swatch" style="background:#f1c40f"><span>金色</span></div>
+            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
+            <div class="rec-swatch" style="background:#2980b9"><span>宝蓝</span></div>
+            <div class="rec-swatch" style="background:#e8c97a"><span>香槟金</span></div>
+          </div>
+          <div class="rec-note">白色在霓虹映照下会反光，特别好看。亮色在夜晚黑色背景下最抢眼。金色与Vegas灯光主题呼应</div>
+        </div>
+        <div class="rec bad">
+          <div class="rec-label">❌ 避免</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch avoid" style="background:#1a1a1a"><span>黑色</span></div>
+            <div class="rec-swatch avoid" style="background:#2c3e50"><span>深色系</span></div>
+          </div>
+          <div class="rec-note">夜晚穿全黑会融入背景，照片里人看不清轮廓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEQUOIA / YOSEMITE -->
+    <div class="region-divider">🌲 红杉 · 优胜美地</div>
+
+    <div class="outfit-card">
+      <div class="outfit-scene">
+        <div class="scene-palette">
+          <div class="swatch" style="background:#2d5a27" title="深绿树木"></div>
+          <div class="swatch" style="background:#8b5e3c" title="红棕树干"></div>
+          <div class="swatch" style="background:#c8c8c8" title="花岗岩灰"></div>
+          <div class="swatch" style="background:#87ceeb" title="蓝天"></div>
+          <div class="swatch" style="background:#7aa3cc" title="蓝色瀑布"></div>
+        </div>
+        <div class="scene-info">
+          <div class="scene-title">Sequoia · Kings Canyon · Yosemite Valley</div>
+          <div class="scene-title-cn">红杉 · 国王峡谷 · 优胜美地</div>
+          <div class="scene-bg">背景色：大量深绿、红棕树干、灰色花岗岩、蓝色瀑布</div>
+        </div>
+      </div>
+      <div class="outfit-recs">
+        <div class="rec good">
+          <div class="rec-label">✅ 强烈推荐</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
+            <div class="rec-swatch" style="background:#e74c3c"><span>橙红</span></div>
+            <div class="rec-swatch" style="background:#f39c12"><span>芥末黄</span></div>
+            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
+            <div class="rec-swatch" style="background:#e8c97a"><span>金黄</span></div>
+            <div class="rec-swatch" style="background:#d35400"><span>橙色</span></div>
+          </div>
+          <div class="rec-note">红色是绿色的对比色，在深绿森林中最出片！芥末黄和橙色也很亮眼。谢尔曼将军树前穿红色，照片震撼感翻倍</div>
+        </div>
+        <div class="rec bad">
+          <div class="rec-label">❌ 避免</div>
+          <div class="rec-swatches">
+            <div class="rec-swatch avoid" style="background:#2d5a27"><span>深绿</span></div>
+            <div class="rec-swatch avoid" style="background:#8b5e3c"><span>棕色</span></div>
+            <div class="rec-swatch avoid" style="background:#c8c8c8"><span>灰色</span></div>
+            <div class="rec-swatch avoid" style="background:#556b2f"><span>橄榄绿</span></div>
+          </div>
+          <div class="rec-note">深绿、棕色与树木完全融合，灰色与花岗岩石壁融合，人会"消失"在背景里</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY TABLE -->
+    <div class="region-divider">📋 一览表 Quick Reference</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:var(--ink);color:white;">
+            <th style="padding:12px 14px;text-align:left;font-family:'Noto Serif SC';font-weight:600;">景点</th>
+            <th style="padding:12px 14px;text-align:left;">✅ 最佳颜色</th>
+            <th style="padding:12px 14px;text-align:left;">❌ 避免</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 14px;font-family:'Noto Serif SC';">旧金山 / 海岸</td>
+            <td style="padding:10px 14px;"><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">金黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span></td>
+            <td style="padding:10px 14px;color:#888;">蓝色、深绿</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--cream);">
+            <td style="padding:10px 14px;font-family:'Noto Serif SC';">塞多纳 / 大峡谷 / 布莱斯</td>
+            <td style="padding:10px 14px;"><span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#1a5276">深蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#8e44ad">紫</span></td>
+            <td style="padding:10px 14px;color:#c0392b;font-weight:600;">红橙珊瑚色 ⚠️</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 14px;font-family:'Noto Serif SC';">约书亚树 / 死亡谷</td>
+            <td style="padding:10px 14px;"><span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#c0392b">红</span></td>
+            <td style="padding:10px 14px;color:#888;">卡其、棕、沙色</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--cream);">
+            <td style="padding:10px 14px;font-family:'Noto Serif SC';">拉斯维加斯（夜晚）</td>
+            <td style="padding:10px 14px;"><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#e8c97a;color:#333">金</span><span class="ctag" style="background:#c0392b">红</span></td>
+            <td style="padding:10px 14px;color:#888;">黑色、深色系</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;font-family:'Noto Serif SC';">红杉 / 优胜美地（森林）</td>
+            <td style="padding:10px 14px;"><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#f39c12;color:#333">芥黄</span><span class="ctag" style="background:#d35400">橙</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span></td>
+            <td style="padding:10px 14px;color:#888;">深绿、棕色、灰色</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="background:#f0f7f0;border-left:4px solid #5a7358;border-radius:0 10px 10px 0;padding:14px 18px;font-size:13px;color:#2d4a2d;font-family:'Noto Serif SC';line-height:1.9;">
+      🌟 <strong>爸妈实用建议：</strong><br>
+      · 带一件<strong>宝蓝色</strong>外套——在红岩区（塞多纳、大峡谷、布莱斯）效果最好，整段旅程最高频使用<br>
+      · 带一件<strong>纯白</strong>上衣——百搭，在任何背景下都不会出错<br>
+      · 带一件<strong>红色</strong>或<strong>橙色</strong>——在绿色森林（红杉、优胜美地）前最出片<br>
+      · <strong>避免整套卡其/沙漠色</strong>户外装备——虽然实用，但在沙漠和大地色背景前会完全消失
+    </div>
+
+  </div>
+</div>
+
+<div class="section" id="sec-tips">
+  <div class="sec-header">
+    <h2>实用贴士 Travel Tips</h2>
+    <p>爸爸妈妈必读 · Essential tips for parents</p>
+  </div>
+  <div class="container" style="padding-top:24px">
+
+    <div class="region-divider">🚗 驾车</div>
+    <div class="tip-card"><div class="tip-icon">🛣️</div><div class="tip-text"><strong>America the Beautiful Pass ($80/年)</strong> — 一张年票可免费进入全美所有国家公园，行程涉及大峡谷、约书亚树、红杉、优胜美地等7个公园，非常值得购买。<span class="cn">美国国家公园年票，80美元可以免费进入本次行程所有国家公园，否则每个公园单独购票$35。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">⛽</div><div class="tip-text"><strong>加油注意</strong> — 美国大部分加油站是自助式（self-service），先刷卡再加油。进入死亡谷和犹他公园地区前务必加满油。<span class="cn">死亡谷、布莱斯峡谷等偏远地区油价贵且加油站少，每次路过小镇都要确认油量。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">📱</div><div class="tip-text"><strong>离线地图</strong> — 提前在Google Maps下载离线地图，死亡谷和犹他公园地区完全没有手机信号。<span class="cn">进入死亡谷前必须下载好离线地图，GPS可以用但需要地图数据已缓存在手机上。</span></div></div>
+
+    <div class="region-divider">🏨 住宿</div>
+    <div class="tip-card"><div class="tip-icon">🔑</div><div class="tip-text"><strong>美国酒店入住退房</strong> — Check-in通常下午3点后，Check-out通常上午11点前。需要护照+信用卡，信用卡会预授权（不扣钱，退房结清即可）。<span class="cn">入住出示护照即可，WiFi密码记得在前台询问。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">🏔</div><div class="tip-text"><strong>公园内住宿需提前6-12个月预订</strong> — Yosemite和Sequoia的Wuksachi Lodge非常抢手，建议现在就预订！<span class="cn">优胜美地山谷内的住宿通常提前一年就被订完，越早越好。</span></div></div>
+
+    <div class="region-divider">🍽 餐饮</div>
+    <div class="tip-card"><div class="tip-icon">💵</div><div class="tip-text"><strong>小费文化</strong> — 餐厅用餐需给小费15-20%，账单上通常会有建议金额。只需在签名单上选择18%或20%即可。<span class="cn">美国餐厅服务员收入很大一部分来自小费，这是必须给的，不是可选的。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">🥣</div><div class="tip-text"><strong>旧金山必吃</strong> — Clam Chowder面包碗（酸面包碗盛奶油蛤蜊汤）是旧金山最具代表性的食物，渔人码头的Boudin Bakery最正宗。<span class="cn">旧金山酸面包（sourdough）是城市名片，面包碗装浓汤是独特的吃法，非常适合拍照。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">🌮</div><div class="tip-text"><strong>超市比餐厅便宜很多</strong> — Trader Joe's、Whole Foods、Safeway都是好选择，可以买各种即食食品、熟食、三明治带去公园野餐。<span class="cn">在国家公园内部餐厅价格非常贵，建议在进公园前在超市准备好午餐。</span></div></div>
+
+    <div class="region-divider">📸 拍照</div>
+    <div class="tip-card"><div class="tip-icon">🌅</div><div class="tip-text"><strong>最佳拍照时间</strong> — 日出后1小时和日落前1小时（黄金时段），光线最柔和温暖。布莱斯峡谷、马蹄湾、死亡谷的Zabriskie Point都在这个时间最美。<span class="cn">正午阳光直射，阴影重，颜色不饱和。早晚光线斜打，颜色最鲜艳，阴影也美。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">🤳</div><div class="tip-text"><strong>帮忙拍照怎么说</strong> — "Could you take a photo for us?" 然后把手机递给对方，美国人都很乐意帮忙。<span class="cn">拍完可以说 "Thank you so much!" 对方一定会很开心。如果照片拍虚了可以说 "One more time please!"</span></div></div>
+
+    <div class="region-divider">🏥 安全</div>
+    <div class="tip-card"><div class="tip-icon">💊</div><div class="tip-text"><strong>高温沙漠注意</strong> — 死亡谷5月平均气温可达38°C，在户外要多喝水（每小时至少半升），戴帽子，涂防晒霜。<span class="cn">沙漠中体感温度比气温高很多，脱水来得很快，不要等渴了才喝水。</span></div></div>
+    <div class="tip-card"><div class="tip-icon">🆘</div><div class="tip-text"><strong>紧急情况拨打911</strong> — 警察、急救、消防全部统一拨打911，免费、24小时、全国通用。<span class="cn">在美国任何地方拨打911都可以，接线员可能有中文服务，或者让旁边的人帮忙描述情况。</span></div></div>
+
+  </div>
+</div>
+
+<!-- FLOATING CHECK COUNTER -->
+<div class="check-counter" id="counter" onclick="showSection('attractions')">
+  <span>✓</span> <span id="counter-num">0</span> 个景点已选
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = { itinerary: 0, attractions: 1, outfit: 2, history: 3, tips: 4 };
+  tabs[map[id]].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── DAY ACCORDION ────────────────────
+function toggleDay(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.day-expand');
+  const isOpen = body.classList.contains('open');
+  // close all
+  document.querySelectorAll('.day-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.day-expand').forEach(a => a.textContent = '›');
+  // open this one if was closed
+  if (!isOpen) {
+    body.classList.add('open');
+    arrow.textContent = '⌄';
+  }
+}
+
+// ─── CHECKLIST ────────────────────────
+let checkedCount = 0;
+const TOTAL = 20;
+
+function toggleCheck(card) {
+  card.classList.toggle('checked');
+  checkedCount = document.querySelectorAll('.attr-card.checked').length;
+  document.getElementById('check-count').textContent = checkedCount;
+  document.getElementById('counter-num').textContent = checkedCount;
+  const counter = document.getElementById('counter');
+  counter.classList.toggle('visible', checkedCount > 0);
+}
+
+// ─── SPEAK (reuse from phrasebook) ────
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+</script>
+</body>
+</html>
