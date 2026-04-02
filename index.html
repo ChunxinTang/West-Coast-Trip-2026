@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>美国西海岸自驾游 · 完整攻略</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root {
   --ink: #1a1a1a;
@@ -187,6 +189,49 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 .time-note { font-size: 12px; color: #888; font-style: italic; }
 .time-note-cn { font-family: 'Noto Serif SC'; font-size: 12px; color: #999; }
 
+/* outfit recommendation */
+.outfit-tip {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.outfit-tip-label {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.outfit-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.outfit-color {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: white;
+  border: 1px solid #ddd;
+}
+.outfit-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
 /* changed badge */
 .new-badge {
   display: inline-block;
@@ -195,28 +240,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
   padding: 2px 5px; border-radius: 3px;
   margin-left: 6px; vertical-align: middle;
   letter-spacing: 1px;
-}
-
-/* ── OUTFIT TIP IN ITINERARY ── */
-.outfit-tip {
-  background: linear-gradient(135deg, #fff8e7 0%, #fef5e0 100%);
-  border: 1px solid #e8d4a8;
-  border-left: 4px solid #c9943a;
-  border-radius: 0 8px 8px 0;
-  padding: 10px 14px;
-  margin: 0 0 12px 0;
-  font-family: 'Noto Serif SC', serif;
-  font-size: 12px;
-  color: #5a4a2a;
-  line-height: 1.8;
-}
-.outfit-tip .ctag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  color: white;
-  margin: 0 2px;
 }
 
 /* ── ATTRACTION CARDS ── */
@@ -308,6 +331,18 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 .check-counter:hover { transform: scale(1.05); }
 .check-counter.visible { display: flex; align-items: center; gap: 8px; }
 
+/* ── MAP TOOLTIPS ── */
+.leaflet-tooltip.lbl { 
+  background: white !important; 
+  border: none !important; 
+  border-radius: 5px !important; 
+  box-shadow: 0 1px 6px rgba(0,0,0,0.22) !important; 
+  padding: 3px 8px 3px 6px !important; 
+}
+.leaflet-tooltip.lbl::before { display: none !important; }
+.lbl-day { font-size: 9px; color: #999; font-family: Arial, sans-serif; display: block; }
+.lbl-name { font-size: 11px; font-weight: bold; font-family: Arial, sans-serif; display: block; }
+
 /* ── OVERVIEW MAP ── */
 .route-overview {
   background: var(--ink);
@@ -349,67 +384,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
   .day-title { font-size: 14px; }
   .attraction-grid { grid-template-columns: 1fr 1fr; }
 }
-
-/* ── OUTFIT COLOR GUIDE ── */
-.outfit-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-.outfit-scene {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 16px;
-  background: var(--ink);
-}
-.scene-palette { display: flex; gap: 6px; flex-shrink: 0; }
-.swatch {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.2);
-  flex-shrink: 0;
-}
-.scene-info { flex: 1; }
-.scene-title { font-size: 13px; font-weight: 600; color: #e8c97a; margin-bottom: 2px; }
-.scene-title-cn { font-family: 'Noto Serif SC'; font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
-.scene-bg { font-size: 11px; color: rgba(255,255,255,0.4); }
-
-.outfit-recs { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
-.rec { }
-.rec-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; color: var(--muted); }
-.rec-swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
-.rec-swatch {
-  width: 44px; height: 44px;
-  border-radius: 8px;
-  display: flex; align-items: flex-end; justify-content: center;
-  padding-bottom: 4px;
-  border: 1px solid rgba(0,0,0,0.1);
-}
-.rec-swatch span {
-  font-size: 9px; color: white; font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-  text-align: center; line-height: 1.2;
-}
-.rec-swatch.avoid { opacity: 0.55; position: relative; }
-.rec-swatch.avoid::after {
-  content: '✕';
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  font-size: 16px; color: white;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-}
-.rec-note { font-size: 12px; color: #666; font-family: 'Noto Serif SC'; line-height: 1.7; }
-.rec.bad { border-top: 1px dashed var(--border); padding-top: 12px; }
-.ctag {
-  display: inline-block;
-  color: white; font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 20px;
-  margin-right: 4px; margin-bottom: 4px;
-}
-.info-box { }
-
 </style>
 </head>
 <body>
@@ -469,8 +443,8 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 <!-- NAV TABS -->
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="showSection('itinerary')">📅 每日行程</button>
-  <button class="nav-tab" onclick="showSection('attractions')">🗺 景点清单</button>
-  <button class="nav-tab" onclick="showSection('outfit')">👗 穿搭配色</button>
+  <button class="nav-tab" onclick="showSection('map')">🗺️ 地图路线</button>
+  <button class="nav-tab" onclick="showSection('attractions')">📍 景点清单</button>
   <button class="nav-tab" onclick="showSection('history')">📖 历史文化</button>
   <button class="nav-tab" onclick="showSection('tips')">💡 实用贴士</button>
 </div>
@@ -487,7 +461,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- SF -->
     <div class="region-divider">🌉 旧金山 San Francisco</div>
-    <div class="outfit-tip">👗 <strong>穿搭建议：</strong>推荐 <span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">金黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#8e44ad">紫</span> ｜ 避免蓝色、深绿（与海天融合）</div>
 
     <!-- Day 1 -->
     <div class="day-card">
@@ -524,6 +497,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Sunset at Pier 39</div>
             <div class="time-cn">39号码头看日落 · 海狮观赏</div>
             <div class="time-note-cn">这里常年栖息数百头加州海狮，是SF最受欢迎的免费景点</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">背景：蓝天、灰色建筑、蓝绿海水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#c0392b"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>金黄</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -556,6 +538,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Mission District · Half Moon Bay</div>
             <div class="time-cn">漫步教会区 · 驾车30分钟到半月湾海岸</div>
             <div class="time-note-cn">教会区街头壁画丰富，有浓厚拉丁文化气息</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">金门大桥橙红 + 蓝天海水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>亮红</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -563,7 +554,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Monterey / Big Sur -->
     <div class="region-divider">🌊 中央海岸 Central Coast</div>
-    <div class="outfit-tip">👗 <strong>穿搭建议：</strong>推荐 <span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">金黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#f39c12;color:#333">橙</span> ｜ 避免蓝色、浅蓝（与海水融合）</div>
 
     <!-- Day 3 -->
     <div class="day-card">
@@ -591,7 +581,16 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
           <div class="time-content">
             <div class="time-en">Carmel-by-the-Sea · Pacific Grove</div>
             <div class="time-cn">卡梅尔小镇逛街 · 太平洋树林</div>
-            <div class="time-note-cn">卡梅尔是美国最美小镇之一，石板路、艺廊、咖啡馆，适合悠闲漫步<br>📍 住宿：150 Fountain Ave, Pacific Grove</div>
+            <div class="time-note-cn">卡梅尔是美国最美小镇之一，石板路、艺廊、咖啡馆，适合悠闲漫步</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">海岸线：蓝天、灰岩、蓝绿海水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>金黄</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -613,9 +612,9 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="time-row">
           <div class="time-badge am">上午</div>
           <div class="time-content">
-            <div class="time-en">Big Sur – Bixby Creek Bridge · Hurricane Vista Point</div>
-            <div class="time-cn">大苏尔–比克斯比桥 · 飓风观景台</div>
-            <div class="time-note-cn">这座1932年建成的混凝土拱桥高80米，悬于悬崖之上，是1号公路最标志性的画面。飓风观景台可以看到整段海岸线全景</div>
+            <div class="time-en">Big Sur – Bixby Creek Bridge</div>
+            <div class="time-cn">大苏尔–比克斯比桥（拍照圣地）</div>
+            <div class="time-note-cn">这座1932年建成的混凝土拱桥高80米，悬于悬崖之上，是1号公路最标志性的画面。Instagram上百万打卡照都在这！</div>
           </div>
         </div>
         <div class="time-row">
@@ -631,7 +630,16 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
           <div class="time-content">
             <div class="time-en">Arrive Morro Bay · Morro Rock sunset</div>
             <div class="time-cn">抵达莫罗湾 · 莫罗岩看日落</div>
-            <div class="time-note-cn">莫罗岩是576英尺高的火山岩，站在海边看日落壮观至极<br>📍 住宿：Anderson Inn / Blufftop Inn & Suites</div>
+            <div class="time-note-cn">莫罗岩是576英尺高的火山岩，站在海边看日落壮观至极</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">大苏尔：灰棕岩石、蓝绿海水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#c0392b"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>金黄</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -639,7 +647,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- LA Desert -->
     <div class="region-divider">🌴 洛杉矶 & 沙漠 Los Angeles & Desert</div>
-    <div class="outfit-tip">👗 <strong>约书亚树穿搭：</strong>推荐 <span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#8e44ad">紫</span> ｜ 避免卡其、棕、沙色（与沙漠融合）</div>
 
     <!-- Day 5 -->
     <div class="day-card">
@@ -668,6 +675,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Hollywood Sign · Hollywood Blvd</div>
             <div class="time-cn">好莱坞标志 · 好莱坞大道星光大道</div>
             <div class="time-note-cn">在Griffith天文台可以同时看到Hollywood招牌和俯瞰LA全景，一石二鸟！</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">城市+海滩：蓝天、灰色建筑</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -700,6 +716,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Hidden Valley · Keys View sunset</div>
             <div class="time-cn">隐谷徒步 · 基斯观景台看日落</div>
             <div class="time-note-cn">Keys View海拔5185英尺，天气好时可以看到Salton Sea和San Jacinto山</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">沙漠：金黄沙石、蓝天</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#2c3e50"></span>深蓝</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -707,7 +732,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Arizona -->
     <div class="region-divider">🏜 亚利桑那 Arizona</div>
-    <div class="outfit-tip">👗 <strong>红岩区穿搭（塞多纳/大峡谷）：</strong>强烈推荐 <span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#1a5276">深蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#2ecc71">绿</span> ｜ ⚠️ 必须避免红、橙、珊瑚色（在红岩前完全消失！）</div>
 
     <!-- Day 7 -->
     <div class="day-card">
@@ -736,6 +760,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Arrive Sedona · Chapel of Holy Cross</div>
             <div class="time-cn">抵达塞多纳 · 圣十字教堂</div>
             <div class="time-note-cn">1956年建于红岩峭壁之间，建筑与自然浑然一体，傍晚光线极美</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">红色岩石背景 ⚠️ 避免橙红色系</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#2ecc71"></span>翠绿</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -768,6 +801,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Cathedral Rock · Pink Jeep Tour (optional)</div>
             <div class="time-cn">大教堂岩 · 可选粉色越野吉普游（约$120/人）</div>
             <div class="time-note-cn">大教堂岩倒影在Oak Creek上，是塞多纳最上镜的景色之一。越野吉普游可以到步行无法到达的秘境红岩地带</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">徒步 + 红岩背景</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>蓝色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#2ecc71"></span>绿色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -800,6 +842,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">South Kaibab Trail (3 hrs) · Sunset at Hopi Point</div>
             <div class="time-cn">南凯巴布步道徒步3小时 · 霍皮观景台看日落</div>
             <div class="time-note-cn">南凯巴布步道可以走到峡谷内部，Ooh Aah Point（1.8英里）和Cedar Ridge（3英里）是推荐折返点，⚠️不建议下到谷底当天返回</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">橙红岩层 ⚠️ 避免橙红、棕色</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#9b59b6"></span>紫色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -807,7 +858,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Page -->
     <div class="region-divider">💧 佩奇 Page · Lake Powell</div>
-    <div class="outfit-tip">👗 <strong>羚羊峡谷/马蹄湾穿搭：</strong>推荐 <span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#c0392b">红</span>（羚羊峡谷光线暗，穿亮色！）｜ 避免卡其、棕色</div>
 
     <!-- Day 10 -->
     <div class="day-card">
@@ -828,6 +878,15 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
             <div class="time-en">Horseshoe Bend (1501 AZ-98)</div>
             <div class="time-cn">马蹄湾（停车费$10，步行约20分钟到观景台）</div>
             <div class="time-note-cn">科罗拉多河在这里形成近270度的U形弯，从270英尺高的悬崖边俯瞰令人腿软。下午2-4点光线最佳，⚠️ 悬崖无护栏注意安全！</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">橙红岩石 + 蓝绿河水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -857,9 +916,18 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="time-row">
           <div class="time-badge pm">下午</div>
           <div class="time-content">
-            <div class="time-en">Glen Canyon Dam · Toadstool Hoodoos · Lone Rock Beach</div>
-            <div class="time-cn">格伦峡谷水坝 · 蟾蜍菌土柱 · 孤岩海滩</div>
-            <div class="time-note-cn">蟾蜍菌土柱是Page附近鲜为人知的惊喜，形似蘑菇的沙岩柱几乎无人排队，是布莱斯峡谷hoodoo的预览。孤岩海滩可以在鲍威尔湖沙滩上露营或戏水</div>
+            <div class="time-en">Glen Canyon Dam · Lake Powell cruise</div>
+            <div class="time-cn">格伦峡谷水坝参观 · 鲍威尔湖游船</div>
+            <div class="time-note-cn">鲍威尔湖是美国第二大人工水库，碧蓝湖水与红色砂岩形成强烈色彩对比，游船可到达仅能水路抵达的彩虹桥国家纪念地</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">羚羊峡谷：橙金色岩壁</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#9b59b6"></span>紫色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#2c3e50"></span>深蓝</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -867,7 +935,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- UTAH: BRYCE CANYON (NEW) -->
     <div class="region-divider">🌅 犹他州 Utah — 布莱斯峡谷 ★ 新加入</div>
-    <div class="outfit-tip">👗 <strong>布莱斯峡谷穿搭：</strong>强烈推荐 <span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#1a5276">深蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#8e44ad">紫</span> ｜ ⚠️ 避免橙、红色（橙色土柱群前会消失）</div>
 
     <!-- Day 12 -->
     <div class="day-card">
@@ -885,9 +952,9 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="time-row">
           <div class="time-badge am">上午</div>
           <div class="time-content">
-            <div class="time-en">Drive Page → Bryce Canyon (2 hrs)</div>
-            <div class="time-cn">驾车前往布莱斯峡谷（2小时）· Inspiration Point灵感观景台</div>
-            <div class="time-note-cn">比之前估计的快——只需2小时，下午有充足时间游览</div>
+            <div class="time-en">Drive Page → Bryce Canyon (3.5 hrs)</div>
+            <div class="time-cn">驾车前往布莱斯峡谷（3.5小时）</div>
+            <div class="time-note-cn">沿途经过Kanab小镇，可以停下来吃午餐</div>
           </div>
         </div>
         <div class="time-row">
@@ -903,7 +970,16 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
           <div class="time-content">
             <div class="time-en">Sunset Point · Rim Trail</div>
             <div class="time-cn">日落观景台 · 峰顶栈道看日落</div>
-            <div class="time-note-cn">布莱斯海拔约9000英尺，日落时橙红色土柱在金光照耀下如烈焰燃烧，是全程最梦幻的日落之一<br>📍 住宿：115 S Main St, Hatch, UT（布莱斯峡谷附近小镇）</div>
+            <div class="time-note-cn">布莱斯海拔约9000英尺，日落时橙红色土柱在金光照耀下如烈焰燃烧，是全程最梦幻的日落之一</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">橙红土柱 ⚠️ 避免橙红、棕</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>亮蓝</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#2ecc71"></span>绿色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -941,8 +1017,17 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="time-row">
           <div class="time-badge eve">晚上</div>
           <div class="time-content">
-            <div class="time-en">Arrive Las Vegas · MGM Grand check in</div>
-            <div class="time-cn">抵达拉斯维加斯，入住米高梅大酒店（MGM Grand）</div>
+            <div class="time-en">Arrive Las Vegas</div>
+            <div class="time-cn">抵达拉斯维加斯，欣赏夜晚霓虹灯</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">拉斯维加斯：明亮夜景</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#000000;border:2px solid #ddd"></span>黑色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>金色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -950,7 +1035,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Vegas -->
     <div class="region-divider">🎰 内华达 Nevada · Las Vegas</div>
-    <div class="outfit-tip">👗 <strong>拉斯维加斯夜晚穿搭：</strong>推荐 <span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#f1c40f;color:#333">金</span><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">香槟</span>（霓虹灯下超美！）｜ 避免全黑（夜晚融入背景）</div>
 
     <!-- Day 14 -->
     <div class="day-card">
@@ -958,35 +1042,44 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="day-num">D14</div>
         <div class="day-info">
           <div class="day-date">Fri · 5/8</div>
-          <div class="day-title">Las Vegas Full Day</div>
-          <div class="day-title-cn">拉斯维加斯全天游</div>
+          <div class="day-title">Las Vegas → Death Valley (drive-thru) → Sequoia</div>
+          <div class="day-title-cn">拉斯维加斯 → 死亡谷路过 → 红杉</div>
         </div>
-        <div class="day-drive"><div class="drive-icon">🎰</div>Vegas日</div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>~6 hr</div>
         <div class="day-expand">›</div>
       </div>
       <div class="day-body">
         <div class="time-row">
           <div class="time-badge am">上午</div>
           <div class="time-content">
-            <div class="time-en">Las Vegas Strip walk · Bellagio Fountains (free)</div>
-            <div class="time-cn">拉斯维加斯大道漫游 · 贝拉吉奥喷泉（免费）</div>
-            <div class="time-note-cn">威尼斯人运河、凯撒宫、纽约纽约、埃菲尔铁塔复制品…不赌钱也可以在大道上逛半天。喷泉每隔15-30分钟一次，夜晚最美</div>
+            <div class="time-en">Las Vegas Strip · Bellagio Fountains (free)</div>
+            <div class="time-cn">拉斯维加斯大道 · 贝拉吉奥喷泉（免费）· 各大酒店大堂</div>
+            <div class="time-note-cn">威尼斯人运河、凯撒宫、纽约纽约、埃菲尔铁塔复制品…不赌钱也可以在大道上逛半天。喷泉每30分钟一次，夜晚最美。Fremont Street也值得看一下</div>
           </div>
         </div>
         <div class="time-row">
           <div class="time-badge pm">下午</div>
           <div class="time-content">
-            <div class="time-en">Fremont Street Experience · High Roller (optional $25)</div>
-            <div class="time-cn">弗里蒙特街 LED 天幕夜市 · 高滚轮摩天轮（可选 $25）</div>
-            <div class="time-note-cn">弗里蒙特街有全球最大LED天幕（460米长），每晚整点有免费灯光秀。高滚轮550英尺高，30分钟转一圈，可以俯瞰整个Strip全景</div>
+            <div class="time-en">⚠️ Depart early! Death Valley drive-through</div>
+            <div class="time-cn">⚠️ 早出发！穿越死亡谷（路过停留，不住宿）</div>
+            <div class="time-note-cn">停：Badwater Basin 巴德沃特盐滩（北美最低点 -282英尺） + Zabriskie Point 扎布里斯基观景台（金色丘陵地貌）。之后继续开约3小时到Sequoia</div>
           </div>
         </div>
         <div class="time-row">
-          <div class="time-badge eve">晚上</div>
+          <div class="time-badge eve">傍晚</div>
           <div class="time-content">
-            <div class="time-en">Dinner on the Strip · MGM Grand</div>
-            <div class="time-cn">Strip上吃晚餐 · 回米高梅大酒店休息</div>
-            <div class="time-note-cn">📍 住宿：MGM Grand Hotel &amp; Casino</div>
+            <div class="time-en">Arrive Sequoia NP · check in</div>
+            <div class="time-cn">傍晚抵达红杉国家公园入住</div>
+            <div class="time-note-cn">📍 Wuksachi Lodge (公园内) 或附近Three Rivers小镇酒店</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">死亡谷：金色沙漠、白色盐滩</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>蓝色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#9b59b6"></span>紫色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -994,43 +1087,43 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Sequoia & Yosemite -->
     <div class="region-divider">🌲 加州国家公园 California Parks</div>
-    <div class="outfit-tip">👗 <strong>红杉/优胜美地穿搭：</strong>强烈推荐 <span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e74c3c">橙红</span><span class="ctag" style="background:#f39c12;color:#333">芥末黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span>（红色在绿林中最出片！）｜ 避免深绿、棕、灰</div>
 
     <!-- Day 15 -->
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
         <div class="day-num">D15</div>
         <div class="day-info">
-          <div class="day-date">Sat · 5/9 ★</div>
-          <div class="day-title">Vegas → Death Valley (drive-thru) → Visalia</div>
-          <div class="day-title-cn">Vegas → 死亡谷路过 → 维萨利亚</div>
+          <div class="day-date">Sat · 5/9</div>
+          <div class="day-title">Sequoia National Park</div>
+          <div class="day-title-cn">红杉国家公园全天</div>
         </div>
-        <div class="day-drive"><div class="drive-icon">🚗</div>~5.5 hr</div>
+        <div class="day-drive"><div class="drive-icon">🌲</div>公园日</div>
         <div class="day-expand">›</div>
       </div>
       <div class="day-body">
         <div class="time-row">
-          <div class="time-badge am">早晨</div>
-          <div class="time-content">
-            <div class="time-en">⚠️ Depart Vegas early morning!</div>
-            <div class="time-cn">⚠️ 清晨早出发！（建议7点前出发）</div>
-            <div class="time-note-cn">今天全程约5.5小时，加上停留时间，需要尽早出发才能在天黑前抵达Visalia</div>
-          </div>
-        </div>
-        <div class="time-row">
           <div class="time-badge am">上午</div>
           <div class="time-content">
-            <div class="time-en">Badwater Basin · Zabriskie Point</div>
-            <div class="time-cn">巴德沃特盐滩（北美最低点）· 扎布里斯基观景台</div>
-            <div class="time-note-cn">Badwater Basin：-282英尺，六边形盐晶铺满地面，超现实感十足。Zabriskie Point：金色丘陵地貌，像置身火星。两处各停约45分钟</div>
+            <div class="time-en">General Sherman Tree + Congress Trail</div>
+            <div class="time-cn">谢尔曼将军树 + 国会步道</div>
+            <div class="time-note-cn">谢尔曼将军树是地球上体积最大的活树（275英尺高，腰围102英尺）。建议早上去，人少光线好。Congress Trail沿途可见大量巨杉群</div>
           </div>
         </div>
         <div class="time-row">
           <div class="time-badge pm">下午</div>
           <div class="time-content">
-            <div class="time-en">Continue drive to Visalia · check in Airbnb</div>
-            <div class="time-cn">继续驾车前往维萨利亚 · 入住爱彼迎</div>
-            <div class="time-note-cn">📍 Airbnb · 213 W Tyler Ave, Visalia, CA（距红杉公园约1.5小时）</div>
+            <div class="time-en">Moro Rock hike · Tunnel Log</div>
+            <div class="time-cn">莫罗岩步道360°全景 · 穿越倒木隧道</div>
+            <div class="time-note-cn">莫罗岩350级石阶登顶，可以360度俯瞰整个Sierra Nevada山脉。倒木隧道是1937年将一棵倒下的巨杉挖穿，车子可以直接开过去</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">森林：深绿树木、灰色岩石</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>黄色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1042,35 +1135,36 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="day-num">D16</div>
         <div class="day-info">
           <div class="day-date">Sun · 5/10</div>
-          <div class="day-title">Sequoia + Kings Canyon NP</div>
-          <div class="day-title-cn">红杉 + 国王峡谷国家公园</div>
+          <div class="day-title">Sequoia → Yosemite</div>
+          <div class="day-title-cn">红杉 → 优胜美地</div>
         </div>
-        <div class="day-drive"><div class="drive-icon">🌲</div>公园日</div>
+        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
         <div class="day-expand">›</div>
       </div>
       <div class="day-body">
         <div class="time-row">
           <div class="time-badge am">上午</div>
           <div class="time-content">
-            <div class="time-en">Drive 1.5 hr to park · General Sherman Tree + Congress Trail</div>
-            <div class="time-cn">驾车1.5小时进公园 · 谢尔曼将军树 + 国会步道</div>
-            <div class="time-note-cn">谢尔曼将军树是地球上体积最大的活树（275英尺高，腰围102英尺）。建议一进公园就直奔这里，人少光线好</div>
+            <div class="time-en">Drive to Yosemite · Tunnel View vista</div>
+            <div class="time-cn">驾车前往优胜美地 · 隧道观景台</div>
+            <div class="time-note-cn">从隧道出来的瞬间，El Capitan、Half Dome、Bridalveil Falls同时出现在视野中——这是全美国最著名的公路出口景色之一</div>
           </div>
         </div>
         <div class="time-row">
           <div class="time-badge pm">下午</div>
           <div class="time-content">
-            <div class="time-en">Kings Canyon NP · Canyon Scenic Byway</div>
-            <div class="time-cn">国王峡谷国家公园 · 峡谷景观公路</div>
-            <div class="time-note-cn">两个公园共用一张门票（$35/车），Kings Canyon以深邃峡谷和将军格兰特树（全球第二大树）著称，峡谷景观公路沿途瀑布、草甸、花岗岩峭壁令人震撼</div>
-          </div>
-        </div>
-        <div class="time-row">
-          <div class="time-badge eve">傍晚</div>
-          <div class="time-content">
-            <div class="time-en">Return to Visalia Airbnb</div>
-            <div class="time-cn">返回维萨利亚爱彼迎休息</div>
-            <div class="time-note-cn">📍 Airbnb · 213 W Tyler Ave, Visalia, CA</div>
+            <div class="time-en">Yosemite Falls · El Capitan Meadow</div>
+            <div class="time-cn">优胜美地瀑布 · 酋长岩草地</div>
+            <div class="time-note-cn">5月是优胜美地瀑布水量最大的季节，瀑布高达2425英尺，从草地仰望El Capitan这面3000英尺垂直岩壁，自然之力令人震撼</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">森林：深绿色、灰色岩石</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>黄色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1082,38 +1176,6 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
         <div class="day-num">D17</div>
         <div class="day-info">
           <div class="day-date">Mon · 5/11</div>
-          <div class="day-title">Visalia → Yosemite</div>
-          <div class="day-title-cn">维萨利亚 → 优胜美地</div>
-        </div>
-        <div class="day-drive"><div class="drive-icon">🚗</div>2.5 hr</div>
-        <div class="day-expand">›</div>
-      </div>
-      <div class="day-body">
-        <div class="time-row">
-          <div class="time-badge am">上午</div>
-          <div class="time-content">
-            <div class="time-en">Drive to Yosemite · Tunnel View vista</div>
-            <div class="time-cn">驾车前往优胜美地 · 隧道观景台</div>
-            <div class="time-note-cn">从隧道出来的瞬间，El Capitan、Half Dome、Bridalveil Falls同时出现在视野中——这是全美最著名的公路出口景色之一</div>
-          </div>
-        </div>
-        <div class="time-row">
-          <div class="time-badge pm">下午</div>
-          <div class="time-content">
-            <div class="time-en">Yosemite Falls · El Capitan Meadow</div>
-            <div class="time-cn">优胜美地瀑布 · 酋长岩草地观景</div>
-            <div class="time-note-cn">5月瀑布水量最大，高2425英尺。从草地仰望El Capitan三千英尺垂直岩壁震撼至极<br>📍 住宿：Yosemite Valley View Hotel</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Day 18 -->
-    <div class="day-card">
-      <div class="day-header" onclick="toggleDay(this)">
-        <div class="day-num">D18</div>
-        <div class="day-info">
-          <div class="day-date">Tue · 5/12</div>
           <div class="day-title">Yosemite Full Day</div>
           <div class="day-title-cn">优胜美地全天游</div>
         </div>
@@ -1126,15 +1188,24 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
           <div class="time-content">
             <div class="time-en">Mist Trail → Vernal Fall (3.6 mi round trip)</div>
             <div class="time-cn">水雾步道 → 弗纳尔瀑布（往返约6公里，中等）</div>
-            <div class="time-note-cn">5月雪融期间水量最大，走近瀑布会被水雾打湿，建议带雨衣！步道最后一段是陡峭石阶，登顶后看到瀑布全景完全值得</div>
+            <div class="time-note-cn">5月雪融期间水量最大，走近瀑布会被水雾打湿，建议带雨衣！步道最后一段是陡峭石阶，但登顶后看到瀑布全景完全值得</div>
           </div>
         </div>
         <div class="time-row">
           <div class="time-badge pm">下午</div>
           <div class="time-content">
-            <div class="time-en">Valley View · Mirror Lake · Cook's Meadow loop</div>
-            <div class="time-cn">山谷观景台 · 镜湖（Half Dome倒影）· 库克草甸环线</div>
-            <div class="time-note-cn">镜湖5月水位最高，Half Dome倒影最清晰，是全程最上镜的景色之一<br>📍 住宿：Yosemite Valley View Hotel（连住第2晚）</div>
+            <div class="time-en">Valley View · Mirror Lake · Cook's Meadow</div>
+            <div class="time-cn">山谷观景台 · 镜湖（Half Dome倒影） · 库克草甸</div>
+            <div class="time-note-cn">镜湖在5月积雪融化时水位最高，Half Dome倒影最清晰，是全程最美的倒影照之一</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">森林+灰色花岗岩+瀑布</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>黄色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#3498db"></span>蓝色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1142,13 +1213,12 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <!-- Day 18-20 -->
     <div class="region-divider">🌉 返回 Return to San Francisco</div>
-    <div class="outfit-tip">👗 <strong>穿搭建议：</strong>推荐 <span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">金黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span> ｜ 渔人码头拍照超美！</div>
 
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
-        <div class="day-num">D19</div>
+        <div class="day-num">D18</div>
         <div class="day-info">
-          <div class="day-date">Wed · 5/13</div>
+          <div class="day-date">Tue · 5/12</div>
           <div class="day-title">Yosemite → San Francisco</div>
           <div class="day-title-cn">优胜美地 → 返回旧金山</div>
         </div>
@@ -1168,7 +1238,16 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
           <div class="time-content">
             <div class="time-en">Fisherman's Wharf · Final dinner in SF</div>
             <div class="time-cn">渔人码头 · 旧金山最后一顿晚餐</div>
-            <div class="time-note-cn">推荐在码头吃新鲜海鲜汤（Clam Chowder面包碗），为整段旅程画上完美句号<br>📍 住宿：DoubleTree by Hilton San Francisco Airport North Bayfront</div>
+            <div class="time-note-cn">推荐在码头吃新鲜海鲜汤（Clam Chowder面包碗），为整段旅程画上完美句号</div>
+            <div class="outfit-tip">
+              <div class="outfit-tip-label">👗 今日穿搭建议</div>
+              <div style="font-family:'Noto Serif SC';font-size:11px;color:#666;margin-bottom:4px;">城市：蓝天、海水</div>
+              <div class="outfit-colors">
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#e74c3c"></span>红色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#ffffff;border:2px solid #ddd"></span>白色</span>
+                <span class="outfit-color"><span class="outfit-color-dot" style="background:#f39c12"></span>金色</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1176,9 +1255,9 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 
     <div class="day-card">
       <div class="day-header" onclick="toggleDay(this)">
-        <div class="day-num">D20</div>
+        <div class="day-num">D19</div>
         <div class="day-info">
-          <div class="day-date">Thu · 5/14</div>
+          <div class="day-date">Wed · 5/13</div>
           <div class="day-title">Fly Home 🛫</div>
           <div class="day-title-cn">启程回国</div>
         </div>
@@ -1200,7 +1279,67 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 </div><!-- /itinerary section -->
 
 <!-- ════════════════════════════════════ -->
-<!-- SECTION 2: ATTRACTIONS             -->
+<!-- SECTION 2: MAP & LOCATIONS         -->
+<!-- ════════════════════════════════════ -->
+<div class="section" id="sec-map">
+  <div class="sec-header">
+    <h2>地图路线 Map & Route</h2>
+    <p>查看完整路线与所有停靠点 · View full route and all stops</p>
+  </div>
+  <div class="container" style="padding:0;max-width:100%;">
+    <div style="background:#1a1a1a;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:24px;color:#e8c97a;font-weight:bold;line-height:1;">20</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Days</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:24px;color:#e8c97a;font-weight:bold;line-height:1;">7</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Parks</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:24px;color:#e8c97a;font-weight:bold;line-height:1;">4</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">States</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:24px;color:#e8c97a;font-weight:bold;line-height:1;">~3k</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Miles</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.5;">
+        SF → Monterey → Big Sur → LA → Joshua Tree → Sedona → Grand Canyon → Page → Bryce → Vegas → Death Valley → Sequoia → Yosemite → SF
+      </div>
+    </div>
+    <div id="map" style="width:100%;height:70vh;min-height:500px;"></div>
+    <div style="background:#1a1a1a;padding:12px 24px;display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);width:100%;margin-bottom:4px;">Legend 图例</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:10px;height:10px;border-radius:50%;background:#c9943a;flex-shrink:0;"></div>Overnight stop 住宿点
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:10px;height:10px;border-radius:50%;background:#2980b9;flex-shrink:0;"></div>National Park 国家公园
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:10px;height:10px;border-radius:50%;background:#c0392b;flex-shrink:0;"></div>Grand Canyon / Bryce ★
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:10px;height:10px;border-radius:50%;background:#8e44ad;flex-shrink:0;"></div>Las Vegas
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:10px;height:10px;border-radius:50%;background:#7f8c8d;opacity:0.7;flex-shrink:0;"></div>Drive-through 路过
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:8px;height:8px;border-radius:50%;background:#e74c3c;flex-shrink:0;"></div>Scenic spot 景点
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.6);">
+        <div style="width:20px;height:3px;border-radius:1px;background:#c9943a;flex-shrink:0;"></div>Route 路线
+      </div>
+    </div>
+  </div>
+</div><!-- /map section -->
+
+<!-- ════════════════════════════════════ -->
+<!-- SECTION 3: ATTRACTIONS             -->
 <!-- ════════════════════════════════════ -->
 <div class="section" id="sec-attractions">
   <div class="sec-header">
@@ -1435,7 +1574,7 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 </div>
 
 <!-- ════════════════════════════════════ -->
-<!-- SECTION 3: HISTORY                 -->
+<!-- SECTION 4: HISTORY                 -->
 <!-- ════════════════════════════════════ -->
 <div class="section" id="sec-history">
   <div class="sec-header">
@@ -1504,284 +1643,8 @@ body { background: var(--paper); color: var(--ink); font-family: 'Source Sans 3'
 </div>
 
 <!-- ════════════════════════════════════ -->
-<!-- SECTION 4: TIPS                    -->
+<!-- SECTION 5: TIPS                    -->
 <!-- ════════════════════════════════════ -->
-<!-- ════════════════════════════════════ -->
-<!-- SECTION: OUTFIT COLOR GUIDE        -->
-<!-- ════════════════════════════════════ -->
-<div class="section" id="sec-outfit">
-  <div class="sec-header">
-    <h2>穿搭配色指南 Outfit Color Guide</h2>
-    <p>根据每个景点的背景色选对衣服，照片效果翻倍 · Pick colors that pop against each landscape</p>
-  </div>
-  <div class="container" style="padding-top:24px">
-
-    <div class="info-box" style="background:#fff8e7;border-left:4px solid #c9943a;border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:24px;font-size:13px;color:#5a4a2a;font-family:'Noto Serif SC',serif;line-height:1.8;">
-      💡 <strong>核心原则：</strong>穿与背景<strong>对比色</strong>最出片，穿与背景<strong>相近色</strong>会融入背景消失。例如红色岩石前不穿橙红，绿色森林前不穿深绿。
-    </div>
-
-    <!-- SF & COAST -->
-    <div class="region-divider">🌉 旧金山 · 中央海岸</div>
-
-    <div class="outfit-card">
-      <div class="outfit-scene">
-        <div class="scene-palette">
-          <div class="swatch" style="background:#4a6fa5" title="蓝天"></div>
-          <div class="swatch" style="background:#c0a882" title="岩石"></div>
-          <div class="swatch" style="background:#6b8e6e" title="植被"></div>
-          <div class="swatch" style="background:#b8cce0" title="海水"></div>
-        </div>
-        <div class="scene-info">
-          <div class="scene-title">Golden Gate Bridge · Big Sur · Morro Bay</div>
-          <div class="scene-title-cn">金门大桥 · 大苏尔 · 莫罗湾</div>
-          <div class="scene-bg">背景色：蓝天、灰棕岩石、蓝绿海水</div>
-        </div>
-      </div>
-      <div class="outfit-recs">
-        <div class="rec good">
-          <div class="rec-label">✅ 推荐</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
-            <div class="rec-swatch" style="background:#e8c97a"><span>金黄</span></div>
-            <div class="rec-swatch" style="background:#fff"><span>纯白</span></div>
-            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
-            <div class="rec-swatch" style="background:#f39c12"><span>橙黄</span></div>
-          </div>
-          <div class="rec-note">红色在蓝色大桥和海水前极抢眼；白色在蓝天映衬下干净清爽；金黄色与大桥橙红色相呼应</div>
-        </div>
-        <div class="rec bad">
-          <div class="rec-label">❌ 避免</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch avoid" style="background:#4a6fa5"><span>蓝色</span></div>
-            <div class="rec-swatch avoid" style="background:#6b8e6e"><span>深绿</span></div>
-            <div class="rec-swatch avoid" style="background:#b8cce0"><span>浅蓝</span></div>
-          </div>
-          <div class="rec-note">蓝色和海天背景融为一体，照片里人会"消失"</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEDONA / GRAND CANYON / BRYCE -->
-    <div class="region-divider">🏜 塞多纳 · 大峡谷 · 布莱斯峡谷 · 死亡谷</div>
-
-    <div class="outfit-card">
-      <div class="outfit-scene">
-        <div class="scene-palette">
-          <div class="swatch" style="background:#c0392b" title="红岩"></div>
-          <div class="swatch" style="background:#e67e22" title="橙色石柱"></div>
-          <div class="swatch" style="background:#d4a843" title="黄沙"></div>
-          <div class="swatch" style="background:#ecf0f1" title="白色石灰岩"></div>
-          <div class="swatch" style="background:#5d6d7e" title="阴影"></div>
-        </div>
-        <div class="scene-info">
-          <div class="scene-title">Sedona · Grand Canyon · Bryce Canyon · Death Valley</div>
-          <div class="scene-title-cn">塞多纳 · 大峡谷 · 布莱斯峡谷 · 死亡谷</div>
-          <div class="scene-bg">背景色：大量红色、橙色、黄沙色岩石</div>
-        </div>
-      </div>
-      <div class="outfit-recs">
-        <div class="rec good">
-          <div class="rec-label">✅ 强烈推荐</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch" style="background:#2980b9"><span>蓝色</span></div>
-            <div class="rec-swatch" style="background:#1a5276"><span>深蓝/海军蓝</span></div>
-            <div class="rec-swatch" style="background:#2ecc71"><span>草绿</span></div>
-            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
-            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
-            <div class="rec-swatch" style="background:#1abc9c"><span>蓝绿</span></div>
-          </div>
-          <div class="rec-note">蓝色是红色的对比色，在红岩前最抢眼！这是摄影师最常推荐的搭配。白色也很好，纯净感强烈。布莱斯峡谷橙白相间，蓝色在这里效果绝佳</div>
-        </div>
-        <div class="rec bad">
-          <div class="rec-label">❌ 必须避免</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch avoid" style="background:#c0392b"><span>红色</span></div>
-            <div class="rec-swatch avoid" style="background:#e67e22"><span>橙色</span></div>
-            <div class="rec-swatch avoid" style="background:#d4a843"><span>卡其/沙色</span></div>
-            <div class="rec-swatch avoid" style="background:#e8b89a"><span>珊瑚粉</span></div>
-          </div>
-          <div class="rec-note">红橙珊瑚色在红岩前完全融化消失，拍照几乎看不见人！这是最常见的错误</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- JOSHUA TREE / ANTELOPE -->
-    <div class="region-divider">🌵 约书亚树 · 羚羊峡谷 · 马蹄湾</div>
-
-    <div class="outfit-card">
-      <div class="outfit-scene">
-        <div class="scene-palette">
-          <div class="swatch" style="background:#c8a87a" title="沙漠金沙"></div>
-          <div class="swatch" style="background:#b5651d" title="红棕沙岩"></div>
-          <div class="swatch" style="background:#87ceeb" title="蓝天"></div>
-          <div class="swatch" style="background:#8b7355" title="棕色岩壁"></div>
-        </div>
-        <div class="scene-info">
-          <div class="scene-title">Joshua Tree · Antelope Canyon · Horseshoe Bend</div>
-          <div class="scene-title-cn">约书亚树 · 羚羊峡谷 · 马蹄湾</div>
-          <div class="scene-bg">背景色：沙漠金沙、红棕岩壁、蓝绿科罗拉多河</div>
-        </div>
-      </div>
-      <div class="outfit-recs">
-        <div class="rec good">
-          <div class="rec-label">✅ 推荐</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch" style="background:#2980b9"><span>蓝色</span></div>
-            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
-            <div class="rec-swatch" style="background:#c0392b"><span>红色</span></div>
-            <div class="rec-swatch" style="background:#8e44ad"><span>紫色</span></div>
-            <div class="rec-swatch" style="background:#16a085"><span>蓝绿</span></div>
-          </div>
-          <div class="rec-note">羚羊峡谷光线昏暗，穿亮色或白色效果更好。马蹄湾俯瞰时背景是蓝绿河水，红色或白色在空中拍最抢眼</div>
-        </div>
-        <div class="rec bad">
-          <div class="rec-label">❌ 避免</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch avoid" style="background:#c8a87a"><span>卡其/米色</span></div>
-            <div class="rec-swatch avoid" style="background:#b5651d"><span>棕色</span></div>
-            <div class="rec-swatch avoid" style="background:#d4a843"><span>沙色</span></div>
-          </div>
-          <div class="rec-note">与沙漠色系太接近，人融入背景</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LAS VEGAS -->
-    <div class="region-divider">🎰 拉斯维加斯</div>
-
-    <div class="outfit-card">
-      <div class="outfit-scene">
-        <div class="scene-palette">
-          <div class="swatch" style="background:#1a1a2e" title="夜晚黑色"></div>
-          <div class="swatch" style="background:#f1c40f" title="霓虹黄金"></div>
-          <div class="swatch" style="background:#e74c3c" title="霓虹红"></div>
-          <div class="swatch" style="background:#9b59b6" title="霓虹紫"></div>
-        </div>
-        <div class="scene-info">
-          <div class="scene-title">Las Vegas Strip · Night Lights</div>
-          <div class="scene-title-cn">拉斯维加斯大道 · 夜晚霓虹</div>
-          <div class="scene-bg">背景色：夜晚黑色 + 五彩霓虹灯</div>
-        </div>
-      </div>
-      <div class="outfit-recs">
-        <div class="rec good">
-          <div class="rec-label">✅ 夜晚推荐</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
-            <div class="rec-swatch" style="background:#f1c40f"><span>金色</span></div>
-            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
-            <div class="rec-swatch" style="background:#2980b9"><span>宝蓝</span></div>
-            <div class="rec-swatch" style="background:#e8c97a"><span>香槟金</span></div>
-          </div>
-          <div class="rec-note">白色在霓虹映照下会反光，特别好看。亮色在夜晚黑色背景下最抢眼。金色与Vegas灯光主题呼应</div>
-        </div>
-        <div class="rec bad">
-          <div class="rec-label">❌ 避免</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch avoid" style="background:#1a1a1a"><span>黑色</span></div>
-            <div class="rec-swatch avoid" style="background:#2c3e50"><span>深色系</span></div>
-          </div>
-          <div class="rec-note">夜晚穿全黑会融入背景，照片里人看不清轮廓</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEQUOIA / YOSEMITE -->
-    <div class="region-divider">🌲 红杉 · 优胜美地</div>
-
-    <div class="outfit-card">
-      <div class="outfit-scene">
-        <div class="scene-palette">
-          <div class="swatch" style="background:#2d5a27" title="深绿树木"></div>
-          <div class="swatch" style="background:#8b5e3c" title="红棕树干"></div>
-          <div class="swatch" style="background:#c8c8c8" title="花岗岩灰"></div>
-          <div class="swatch" style="background:#87ceeb" title="蓝天"></div>
-          <div class="swatch" style="background:#7aa3cc" title="蓝色瀑布"></div>
-        </div>
-        <div class="scene-info">
-          <div class="scene-title">Sequoia · Kings Canyon · Yosemite Valley</div>
-          <div class="scene-title-cn">红杉 · 国王峡谷 · 优胜美地</div>
-          <div class="scene-bg">背景色：大量深绿、红棕树干、灰色花岗岩、蓝色瀑布</div>
-        </div>
-      </div>
-      <div class="outfit-recs">
-        <div class="rec good">
-          <div class="rec-label">✅ 强烈推荐</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch" style="background:#c0392b"><span>正红</span></div>
-            <div class="rec-swatch" style="background:#e74c3c"><span>橙红</span></div>
-            <div class="rec-swatch" style="background:#f39c12"><span>芥末黄</span></div>
-            <div class="rec-swatch" style="background:#fff"><span>白色</span></div>
-            <div class="rec-swatch" style="background:#e8c97a"><span>金黄</span></div>
-            <div class="rec-swatch" style="background:#d35400"><span>橙色</span></div>
-          </div>
-          <div class="rec-note">红色是绿色的对比色，在深绿森林中最出片！芥末黄和橙色也很亮眼。谢尔曼将军树前穿红色，照片震撼感翻倍</div>
-        </div>
-        <div class="rec bad">
-          <div class="rec-label">❌ 避免</div>
-          <div class="rec-swatches">
-            <div class="rec-swatch avoid" style="background:#2d5a27"><span>深绿</span></div>
-            <div class="rec-swatch avoid" style="background:#8b5e3c"><span>棕色</span></div>
-            <div class="rec-swatch avoid" style="background:#c8c8c8"><span>灰色</span></div>
-            <div class="rec-swatch avoid" style="background:#556b2f"><span>橄榄绿</span></div>
-          </div>
-          <div class="rec-note">深绿、棕色与树木完全融合，灰色与花岗岩石壁融合，人会"消失"在背景里</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUMMARY TABLE -->
-    <div class="region-divider">📋 一览表 Quick Reference</div>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
-      <table style="width:100%;border-collapse:collapse;font-size:13px;">
-        <thead>
-          <tr style="background:var(--ink);color:white;">
-            <th style="padding:12px 14px;text-align:left;font-family:'Noto Serif SC';font-weight:600;">景点</th>
-            <th style="padding:12px 14px;text-align:left;">✅ 最佳颜色</th>
-            <th style="padding:12px 14px;text-align:left;">❌ 避免</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border);">
-            <td style="padding:10px 14px;font-family:'Noto Serif SC';">旧金山 / 海岸</td>
-            <td style="padding:10px 14px;"><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#e8c97a;color:#333">金黄</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span></td>
-            <td style="padding:10px 14px;color:#888;">蓝色、深绿</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--cream);">
-            <td style="padding:10px 14px;font-family:'Noto Serif SC';">塞多纳 / 大峡谷 / 布莱斯</td>
-            <td style="padding:10px 14px;"><span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#1a5276">深蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#8e44ad">紫</span></td>
-            <td style="padding:10px 14px;color:#c0392b;font-weight:600;">红橙珊瑚色 ⚠️</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);">
-            <td style="padding:10px 14px;font-family:'Noto Serif SC';">约书亚树 / 死亡谷</td>
-            <td style="padding:10px 14px;"><span class="ctag" style="background:#2980b9">蓝</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#c0392b">红</span></td>
-            <td style="padding:10px 14px;color:#888;">卡其、棕、沙色</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border);background:var(--cream);">
-            <td style="padding:10px 14px;font-family:'Noto Serif SC';">拉斯维加斯（夜晚）</td>
-            <td style="padding:10px 14px;"><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span><span class="ctag" style="background:#e8c97a;color:#333">金</span><span class="ctag" style="background:#c0392b">红</span></td>
-            <td style="padding:10px 14px;color:#888;">黑色、深色系</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 14px;font-family:'Noto Serif SC';">红杉 / 优胜美地（森林）</td>
-            <td style="padding:10px 14px;"><span class="ctag" style="background:#c0392b">红</span><span class="ctag" style="background:#f39c12;color:#333">芥黄</span><span class="ctag" style="background:#d35400">橙</span><span class="ctag" style="background:#fff;color:#333;border:1px solid #ddd">白</span></td>
-            <td style="padding:10px 14px;color:#888;">深绿、棕色、灰色</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div style="background:#f0f7f0;border-left:4px solid #5a7358;border-radius:0 10px 10px 0;padding:14px 18px;font-size:13px;color:#2d4a2d;font-family:'Noto Serif SC';line-height:1.9;">
-      🌟 <strong>爸妈实用建议：</strong><br>
-      · 带一件<strong>宝蓝色</strong>外套——在红岩区（塞多纳、大峡谷、布莱斯）效果最好，整段旅程最高频使用<br>
-      · 带一件<strong>纯白</strong>上衣——百搭，在任何背景下都不会出错<br>
-      · 带一件<strong>红色</strong>或<strong>橙色</strong>——在绿色森林（红杉、优胜美地）前最出片<br>
-      · <strong>避免整套卡其/沙漠色</strong>户外装备——虽然实用，但在沙漠和大地色背景前会完全消失
-    </div>
-
-  </div>
-</div>
-
 <div class="section" id="sec-tips">
   <div class="sec-header">
     <h2>实用贴士 Travel Tips</h2>
@@ -1826,9 +1689,15 @@ function showSection(id) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('sec-' + id).classList.add('active');
   const tabs = document.querySelectorAll('.nav-tab');
-  const map = { itinerary: 0, attractions: 1, outfit: 2, history: 3, tips: 4 };
+  const map = { itinerary: 0, map: 1, attractions: 2, history: 3, tips: 4 };
   tabs[map[id]].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Initialize map when map tab is shown
+  if (id === 'map' && !window.mapInitialized) {
+    initMap();
+    window.mapInitialized = true;
+  }
 }
 
 // ─── DAY ACCORDION ────────────────────
@@ -1866,6 +1735,116 @@ function speak(text) {
   u.lang = 'en-US'; u.rate = 0.85;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(u);
+}
+
+// ─── MAP INITIALIZATION ────
+function initMap() {
+  const mapEl = document.getElementById('map');
+  if (!mapEl || window.leafletMap) return;
+  
+  window.leafletMap = L.map('map', {center: [36.5, -114], zoom: 6, zoomControl: true});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(window.leafletMap);
+
+  const stops = [
+    {day:'D1–D2 · Apr 25–26', name:'San Francisco, CA', lat:37.7749, lng:-122.4194, color:'#c9943a', r:9, url:'https://maps.google.com/?cid=5232732860306700634'},
+    {day:'D3 · Apr 27', name:'Pacific Grove / Monterey', lat:36.6177, lng:-121.9166, color:'#c9943a', r:7, url:'https://maps.google.com/?cid=10163046085403947725'},
+    {day:'D4 · Apr 28', name:'Bixby Creek Bridge', lat:36.3715, lng:-121.9019, color:'#7f8c8d', r:5, url:'https://maps.google.com/?cid=12253230558059767477'},
+    {day:'D4 · Apr 28', name:'Morro Bay, CA', lat:35.3658, lng:-120.8499, color:'#c9943a', r:7, url:'https://maps.google.com/?cid=3905419971316336668'},
+    {day:'D5 · Apr 29', name:'Los Angeles, CA', lat:34.0522, lng:-118.2437, color:'#c9943a', r:8, url:'https://maps.google.com/?cid=8358407893482396380'},
+    {day:'D6 · Apr 30', name:'Joshua Tree NP', lat:33.8734, lng:-115.9010, color:'#2980b9', r:7, url:'https://maps.google.com/?cid=12496467462651218724'},
+    {day:'D7–D8 · May 1–2', name:'Sedona, AZ', lat:34.8697, lng:-111.7609, color:'#c9943a', r:8, url:'https://maps.google.com/?cid=12055784267033077739'},
+    {day:'D9 · May 3', name:'Grand Canyon South Rim', lat:36.0544, lng:-112.1401, color:'#c0392b', r:9, url:'https://maps.google.com/?cid=14511446600339381986'},
+    {day:'D10–D11 · May 4–5', name:'Page, AZ · Lake Powell', lat:36.9147, lng:-111.4470, color:'#c9943a', r:7, url:'https://maps.google.com/?cid=13124444142838376489'},
+    {day:'D12 · May 6 ★', name:'Bryce Canyon NP', lat:37.6266, lng:-112.1683, color:'#c0392b', r:8, url:'https://maps.google.com/?cid=2379276533053638326'},
+    {day:'D13 · May 7', name:'Zion NP (drive-through)', lat:37.2982, lng:-113.0263, color:'#7f8c8d', r:5, url:'https://maps.google.com/?cid=8948153374356166389'},
+    {day:'D13–D14 · May 7–8', name:'Las Vegas, NV', lat:36.1699, lng:-115.1398, color:'#8e44ad', r:9, url:'https://maps.google.com/?cid=3383197481682797935'},
+    {day:'D15 · May 9', name:'Badwater Basin (pass-thru)', lat:36.2461, lng:-116.8185, color:'#7f8c8d', r:5, url:'https://maps.google.com/?cid=8942400828304486886'},
+    {day:'D15 · May 9', name:'Visalia, CA (Airbnb)', lat:36.3302, lng:-119.2921, color:'#c9943a', r:7, url:'https://maps.google.com/?cid=17144763963783683486'},
+    {day:'D16 · May 10', name:'Sequoia & Kings Canyon', lat:36.4863, lng:-118.5658, color:'#2980b9', r:8, url:'https://maps.google.com/?cid=12837081678111216008'},
+    {day:'D17–D18 · May 11–12', name:'Yosemite Valley', lat:37.7456, lng:-119.5936, color:'#2980b9', r:9, url:'https://maps.google.com/?cid=5415354865894640718'},
+    {day:'D19–D20 · May 13–14', name:'San Francisco (return)', lat:37.6213, lng:-122.3790, color:'#c9943a', r:8, url:'https://maps.google.com/?cid=16484548574671789768'},
+  ];
+
+  L.polyline(stops.map(s => [s.lat, s.lng]), {
+    color: '#c9943a',
+    weight: 2.5,
+    opacity: 0.7,
+    dashArray: '8,5',
+    lineJoin: 'round'
+  }).addTo(window.leafletMap);
+
+  const offsets = {
+    'San Francisco, CA': [10, -20],
+    'Pacific Grove / Monterey': [10, -16],
+    'Bixby Creek Bridge': [8, -14],
+    'Morro Bay, CA': [10, -16],
+    'Los Angeles, CA': [-160, -16],
+    'Joshua Tree NP': [10, -16],
+    'Sedona, AZ': [10, -16],
+    'Grand Canyon South Rim': [10, -20],
+    'Page, AZ · Lake Powell': [10, -16],
+    'Bryce Canyon NP': [10, -20],
+    'Zion NP (drive-through)': [-178, -14],
+    'Las Vegas, NV': [-148, -20],
+    'Badwater Basin (pass-thru)': [8, -14],
+    'Visalia, CA (Airbnb)': [-170, -16],
+    'Sequoia & Kings Canyon': [-192, -20],
+    'Yosemite Valley': [10, -20],
+    'San Francisco (return)': [-188, -16],
+  };
+
+  stops.forEach(s => {
+    const c = L.circleMarker([s.lat, s.lng], {
+      radius: s.r,
+      fillColor: s.color,
+      color: 'white',
+      weight: 2,
+      fillOpacity: 0.92
+    }).addTo(window.leafletMap);
+    
+    c.bindPopup(`
+      <div style="font-family:Arial,sans-serif;min-width:170px;">
+        <div style="font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">${s.day}</div>
+        <div style="font-size:13px;font-weight:bold;color:#1a1a1a;margin-bottom:8px;">${s.name}</div>
+        <a href="${s.url}" target="_blank" style="display:block;background:#4285F4;color:white;padding:7px;border-radius:5px;text-decoration:none;font-size:11px;text-align:center;">📍 Open in Google Maps</a>
+      </div>`, {maxWidth: 220});
+    
+    const isDriveThru = s.color === '#7f8c8d';
+    const [ox, oy] = offsets[s.name] || [10, -14];
+    c.bindTooltip(`<span class="lbl-day">${s.day}</span><span class="lbl-name" style="color:${s.color};">${s.name}</span>`, {
+      permanent: !isDriveThru,
+      direction: 'right',
+      offset: [ox, oy],
+      opacity: 1,
+      className: 'lbl'
+    });
+  });
+
+  const scenic = [
+    {lat:36.4201, lng:-116.8122, name:'Zabriskie Point'},
+    {lat:36.8768, lng:-111.5057, name:'Horseshoe Bend'},
+    {lat:36.9031, lng:-111.4133, name:'Antelope Canyon'},
+    {lat:37.7158, lng:-119.6775, name:'Tunnel View'},
+    {lat:36.5817, lng:-118.7514, name:'General Sherman Tree'},
+    {lat:36.0617, lng:-112.1077, name:'Mather Point'},
+    {lat:37.6234, lng:-112.1672, name:'Sunset Point (Bryce)'},
+  ];
+  
+  scenic.forEach(s => {
+    L.circleMarker([s.lat, s.lng], {
+      radius: 4,
+      fillColor: '#e74c3c',
+      color: 'white',
+      weight: 1.5,
+      fillOpacity: 0.85
+    }).addTo(window.leafletMap).bindTooltip(`<span style="font-size:10px;font-family:Arial;">${s.name}</span>`, {direction: 'top'});
+  });
+
+  window.leafletMap.fitBounds(L.latLngBounds(stops.map(s => [s.lat, s.lng])).pad(0.07));
 }
 </script>
 </body>
